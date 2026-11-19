@@ -21,8 +21,8 @@ const fm = FileManager.local();
 const cachePath = fm.joinPath(fm.documentsDirectory(), UPDATE_CONFIG.cacheFileName);
 
 function appVersion(source) {
-  const match = source.match(/^\\/\\/\\s*APP_VERSION:\\s*(.+)$/m);
-  return match ? match[1].trim() : "unknown";
+  const line = source.split("\n").find((item) => item.startsWith("// APP_VERSION:"));
+  return line ? line.slice("// APP_VERSION:".length).trim() : "unknown";
 }
 
 function validateAppSource(source) {
@@ -40,7 +40,7 @@ function validateAppSource(source) {
   }
 
   // Compile before caching or execution, so a broken update cannot replace the good cache.
-  new Function("return (async function(){\\n" + source + "\\n}).call(this);");
+  new Function("return (async function(){\n" + source + "\n}).call(this);");
   return source;
 }
 
@@ -67,7 +67,7 @@ function readCachedApp() {
 
 async function executeApp(source) {
   // The main app contains top-level await. This wrapper permits it inside Scriptable.
-  const run = new Function("return (async function(){\\n" + source + "\\n}).call(this);");
+  const run = new Function("return (async function(){\n" + source + "\n}).call(this);");
   await run();
 }
 
