@@ -1,0 +1,12 @@
+{
+  "name": "pvtshiiiiii",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "node tools/test-verifier.mjs && node tools/test-updater.mjs && node tools/build.mjs --no-sign && node tools/e2e.mjs && node tools/e2e-native.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.65.1"
+  }
+}

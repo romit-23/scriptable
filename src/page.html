@@ -1,0 +1,1416 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-__NONCE__'; style-src 'unsafe-inline'; img-src blob: data:; media-src blob:; connect-src __CONNECT__; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0A0A0D" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4F4F7" media="(prefers-color-scheme: light)">
+<title>pvtshiiiiii</title>
+<style>
+:root{
+  --bg:#0A0A0D;--elev:#121218;--surface:#17171E;--surface-2:#202029;--surface-3:#2A2A35;
+  --line:rgba(255,255,255,.07);--line-2:rgba(255,255,255,.12);
+  --text:#F4F4F6;--text-2:#A3A3AE;--text-3:#70707C;
+  --accent:#7D82FF;--accent-strong:#5A5EEA;--accent-soft:rgba(125,130,255,.14);--on-accent:#FFFFFF;
+  --me-1:#5A5EEA;--me-2:#7547DB;--them:#1C1C24;
+  --danger:#FF6B6B;--danger-soft:rgba(255,107,107,.12);--ok:#3DDC97;--ok-soft:rgba(61,220,151,.12);--warn:#FFB547;--warn-soft:rgba(255,181,71,.12);
+  --scrim:rgba(0,0,0,.55);--shadow:0 18px 50px rgba(0,0,0,.5);
+  --r-xl:28px;--r-lg:22px;--r-md:16px;--r-sm:12px;
+  --fs-display:1.875rem;--fs-title:1.0625rem;--fs-body:1rem;--fs-callout:.9375rem;--fs-caption:.8125rem;--fs-micro:.75rem;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",system-ui,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#F4F4F7;--elev:#FFFFFF;--surface:#FFFFFF;--surface-2:#EDEDF2;--surface-3:#E2E2E9;
+    --line:rgba(10,10,20,.07);--line-2:rgba(10,10,20,.12);
+    --text:#111116;--text-2:#5C5C69;--text-3:#8B8B97;
+    --accent:#4F53E0;--accent-strong:#4F53E0;--accent-soft:rgba(79,83,224,.10);
+    --them:#FFFFFF;--danger:#D93C3C;--danger-soft:rgba(217,60,60,.10);--ok:#18A06A;--ok-soft:rgba(24,160,106,.10);--warn:#B86E00;--warn-soft:rgba(184,110,0,.10);
+    --scrim:rgba(10,10,20,.35);--shadow:0 18px 50px rgba(10,10,30,.18);
+    color-scheme:light;
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:100%;line-height:1.45;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;overscroll-behavior:none}
+body{overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+@media (hover:hover){.btn:hover,.cbtn:hover,.key:hover,.opt:hover{filter:brightness(1.12)}.tb:hover{background:var(--surface-2)}}
+button:disabled{opacity:.45;cursor:default}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ico{display:inline-flex;width:1.25rem;height:1.25rem;flex:none}
+.ico svg{width:100%;height:100%}
+.tnum{font-variant-numeric:tabular-nums}
+#root{height:100%}
+.view{height:100%;display:flex;flex-direction:column;animation:in .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ---------- onboarding / forms ---------- */
+.page{flex:1;overflow-y:auto;padding:calc(28px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column}
+.page .grow{flex:1}
+.emblem{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;color:var(--on-accent);background:linear-gradient(135deg,var(--me-1),var(--me-2));box-shadow:0 12px 30px rgba(90,94,234,.35);margin-bottom:22px}
+.emblem .ico{width:30px;height:30px}
+.emblem.warn{background:linear-gradient(135deg,#F59E0B,#EF6C3C);box-shadow:0 12px 30px rgba(239,108,60,.3)}
+.emblem.danger{background:linear-gradient(135deg,#F05252,#C0392B);box-shadow:0 12px 30px rgba(192,57,43,.3)}
+h1{margin:0;font-size:var(--fs-display);line-height:1.12;font-weight:700;letter-spacing:-.02em;text-wrap:balance}
+.lede{margin:10px 0 0;color:var(--text-2);font-size:var(--fs-body);line-height:1.5;max-width:34ch;text-wrap:pretty}
+.features{margin:28px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px}
+.features li{display:flex;gap:14px;align-items:flex-start}
+.features .fi{width:36px;height:36px;border-radius:11px;background:var(--surface-2);display:grid;place-items:center;color:var(--accent);flex:none}
+.features b{display:block;font-weight:600;font-size:var(--fs-callout);line-height:1.3}
+.features span.d{display:block;color:var(--text-2);font-size:var(--fs-caption);line-height:1.4;margin-top:2px}
+.actions{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+.btn{height:54px;border-radius:var(--r-md);font-size:var(--fs-body);font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--surface-2);color:var(--text);transition:transform .12s,opacity .12s}
+.btn:active{transform:scale(.98)}
+.btn.pri{background:var(--accent-strong);color:var(--on-accent)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.danger{background:var(--danger-soft);color:var(--danger)}
+.back{align-self:flex-start;display:flex;align-items:center;gap:4px;color:var(--accent);font-size:var(--fs-body);margin:-6px 0 18px -6px;padding:6px}
+.field{width:100%;min-height:54px;border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--surface);color:var(--text);font:inherit;font-size:1rem;padding:15px 16px;outline:0;resize:none}
+.field:focus{border-color:var(--accent)}
+textarea.field{min-height:120px;font-family:var(--mono);font-size:1rem;line-height:1.45;word-break:break-all}
+.hint{color:var(--text-3);font-size:var(--fs-caption);margin:8px 2px 0;line-height:1.4}
+.err{color:var(--danger);font-size:var(--fs-caption);min-height:1.4em;margin:10px 2px 0;line-height:1.4}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px}
+.invite-code{font-family:var(--mono);font-size:var(--fs-callout);line-height:1.5;word-break:break-all;color:var(--text);-webkit-user-select:all;user-select:all}
+.pill{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:14px;font-size:var(--fs-micro);font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.neutral{background:var(--surface-2);color:var(--text-2)}
+.pill .ico{width:.9rem;height:.9rem}
+.row-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.spinner{width:28px;height:28px;border-radius:50%;border:3px solid var(--surface-3);border-top-color:var(--accent);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:24px}
+.center p{margin:0;color:var(--text-2);max-width:30ch}
+
+/* ---------- passcode ---------- */
+.pc{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:calc(36px + env(safe-area-inset-top)) 24px calc(18px + env(safe-area-inset-bottom))}
+.pc .emblem{margin-bottom:18px;width:56px;height:56px;border-radius:18px}
+.pc h1{font-size:1.5rem;text-align:center}
+.pc .lede{text-align:center;margin-top:8px;font-size:var(--fs-callout)}
+.dots{display:flex;gap:16px;margin:30px 0 6px;height:16px}
+.dots i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--text-3);transition:background .12s,border-color .12s,transform .12s}
+.dots i.on{background:var(--text);border-color:var(--text);transform:scale(1.05)}
+.dots.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.pc .err{text-align:center}
+.keypad{margin-top:auto;display:grid;grid-template-columns:repeat(3,76px);gap:16px 26px;justify-content:center;padding-top:16px}
+.key{width:76px;height:76px;border-radius:50%;background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.75rem;font-weight:400;line-height:1;transition:background .1s}
+.key small{font-size:.625rem;font-weight:600;letter-spacing:.14em;color:var(--text-2);margin-top:3px}
+.key:active{background:var(--surface-3)}
+.key.fn{background:transparent;font-size:var(--fs-callout);font-weight:500;color:var(--text-2)}
+.key.fn .ico{width:1.6rem;height:1.6rem}
+.alpha{width:100%;max-width:340px;margin-top:28px;display:flex;flex-direction:column;gap:10px}
+.switch-mode{margin-top:16px;color:var(--accent);font-size:var(--fs-callout);padding:8px}
+
+/* ---------- chat ---------- */
+.chat{height:100%;display:flex;flex-direction:column;background:var(--bg)}
+.topbar{flex:none;display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top)) 12px 10px 16px;background:var(--bg);background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);border-bottom:1px solid var(--line);position:relative;z-index:3}
+.avatar{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:700;font-size:var(--fs-callout);color:var(--on-accent);background:linear-gradient(135deg,var(--me-1),var(--me-2))}
+.who{flex:1;min-width:0}
+.who b{display:block;font-size:var(--fs-title);font-weight:600;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who .st{display:flex;align-items:center;gap:5px;font-size:var(--fs-micro);color:var(--text-2);line-height:1.3;margin-top:1px;white-space:nowrap}
+.who .st .ico{width:.8rem;height:.8rem;color:var(--ok)}
+.who .st.unv .ico{color:var(--warn)}
+.tb{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--text-2)}
+.tb:active{background:var(--surface-2)}
+.banner{flex:none;margin:10px 12px 0;padding:12px 14px;border-radius:var(--r-md);font-size:var(--fs-caption);line-height:1.4;display:flex;gap:10px;align-items:flex-start}
+.banner .ico{width:1.1rem;height:1.1rem;margin-top:1px}
+.banner.warn{background:var(--warn-soft);color:var(--warn)}
+.banner.danger{background:var(--danger-soft);color:var(--danger)}
+.banner b{display:block;font-weight:600}
+#list{flex:1;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:12px 12px 16px;display:flex;flex-direction:column;-webkit-overflow-scrolling:touch}
+.empty{margin:auto;text-align:center;color:var(--text-2);padding:30px 24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.empty .emblem{margin:0 0 4px;width:56px;height:56px;border-radius:18px}
+.empty b{color:var(--text);font-size:var(--fs-title);font-weight:600}
+.empty p{margin:0;font-size:var(--fs-callout);max-width:28ch;line-height:1.5}
+.empty .btn{width:auto;padding:0 22px;height:46px;margin-top:6px}
+.msg{display:flex;flex-direction:column;align-items:flex-start;margin-top:2px}
+.msg.gs{margin-top:12px}
+.msg.me{align-items:flex-end}
+.daysep{align-self:center;margin:14px 0 6px;font-size:var(--fs-micro);font-weight:600;color:var(--text-3);letter-spacing:.05em;text-transform:uppercase}
+.bub{max-width:min(78%,320px);padding:9px 14px;border-radius:20px;background:var(--them);border:1px solid var(--line);font-size:var(--fs-body);line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere;position:relative}
+.me .bub{background:linear-gradient(135deg,var(--me-1),var(--me-2));border-color:transparent;color:var(--on-accent)}
+.msg:not(.ge) .bub{border-bottom-left-radius:8px}
+.msg.me:not(.ge) .bub{border-bottom-left-radius:20px;border-bottom-right-radius:8px}
+.msg:not(.gs) .bub{border-top-left-radius:8px}
+.msg.me:not(.gs) .bub{border-top-left-radius:20px;border-top-right-radius:8px}
+.msg.ge .bub{border-bottom-left-radius:6px}
+.msg.me.ge .bub{border-bottom-left-radius:20px;border-bottom-right-radius:6px}
+.bub.bad{background:transparent;border:1px dashed var(--line-2);color:var(--text-3);font-style:italic;display:flex;gap:8px;align-items:center}
+.meta{display:none;margin:4px 6px 0;font-size:var(--fs-micro);color:var(--text-3);line-height:1.3;gap:6px;align-items:center;white-space:nowrap}
+.msg.ge .meta{display:flex}
+.meta .ico{width:.85rem;height:.85rem}
+.meta .fail{color:var(--danger);font-weight:600}
+.bub.media{padding:0;overflow:hidden;width:min(68vw,260px);background:var(--surface-2);border:0;cursor:pointer}
+.bub.media .frame{position:relative;width:100%;background:var(--surface-3)}
+.bub.media img,.bub.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.bub.media img.th{filter:blur(14px);transform:scale(1.15)}
+.ovl{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.play{width:54px;height:54px;border-radius:50%;background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:grid;place-items:center;color:#fff}
+.play .ico{width:1.5rem;height:1.5rem;margin-left:3px}
+.chip{position:absolute;left:8px;bottom:8px;padding:3px 8px;border-radius:10px;background:rgba(0,0,0,.5);color:#fff;font-size:var(--fs-micro);font-weight:600}
+.ring{width:46px;height:46px}
+.ring circle{fill:none;stroke-width:3.5}
+.ring .bg{stroke:rgba(255,255,255,.25)}
+.ring .fg{stroke:#fff;stroke-linecap:round;transition:stroke-dashoffset .2s;transform:rotate(-90deg);transform-origin:50% 50%}
+.ringwrap{width:54px;height:54px;border-radius:50%;background:rgba(0,0,0,.45);display:grid;place-items:center}
+.bub.voice{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;width:min(72vw,270px)}
+.vplay{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--accent-strong);color:#fff}
+.me .vplay{background:rgba(255,255,255,.22)}
+.vplay .ico{width:1.1rem;height:1.1rem}
+.wave{flex:1;height:30px;display:flex;align-items:center;gap:2px;min-width:0}
+.wave i{flex:1;min-width:2px;border-radius:2px;background:currentColor;opacity:.35}
+.wave i.on{opacity:1}
+.vdur{font-size:var(--fs-micro);font-weight:600;min-width:2.6em;text-align:end;opacity:.85}
+
+/* composer */
+.composer{flex:none;display:flex;align-items:flex-end;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.cbtn{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;color:var(--text-2);background:var(--surface-2);transition:transform .12s,background .12s}
+.cbtn:active{transform:scale(.92)}
+.cbtn.pri{background:var(--accent-strong);color:var(--on-accent)}
+.cbtn .ico{width:1.3rem;height:1.3rem}
+.inputwrap{flex:1;min-width:0;background:var(--surface);border:1px solid var(--line-2);border-radius:21px;display:flex}
+#txt{flex:1;min-width:0;border:0;background:transparent;color:var(--text);font:inherit;font-size:1rem;line-height:1.35;padding:10px 16px;max-height:132px;resize:none;outline:0;display:block}
+#txt::placeholder{color:var(--text-3)}
+.rec{flex:1;display:flex;align-items:center;gap:10px;height:42px;padding:0 14px;border-radius:21px;background:var(--danger-soft);color:var(--danger);min-width:0}
+.rec .dot{width:9px;height:9px;border-radius:50%;background:var(--danger);animation:pulse 1.2s ease-in-out infinite;flex:none}
+@keyframes pulse{50%{opacity:.25}}
+.rec .time{font-weight:600;font-size:var(--fs-callout);min-width:3.2em}
+.rec .wave{color:var(--danger);height:24px;overflow:hidden;justify-content:flex-end}
+.rec .wave i{flex:none;width:3px;opacity:.9}
+.cbtn.del{background:transparent;color:var(--danger)}
+
+/* sheets, dialogs, viewer, toast */
+.scrim{position:fixed;inset:0;background:var(--scrim);z-index:20;opacity:0;transition:opacity .2s}
+.scrim.show{opacity:1}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:var(--elev);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:8px 16px calc(16px + env(safe-area-inset-bottom));box-shadow:var(--shadow);transform:translateY(100%);transition:transform .28s cubic-bezier(.2,.8,.2,1);max-height:88%;overflow-y:auto;overscroll-behavior:contain}
+.sheet.show{transform:none}
+.grab{width:38px;height:5px;border-radius:3px;background:var(--surface-3);margin:4px auto 12px}
+.sheet h2{margin:2px 4px 14px;font-size:var(--fs-title);font-weight:600;line-height:1.25}
+.opts{display:flex;flex-direction:column;background:var(--surface);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line)}
+.opt{display:flex;align-items:center;gap:14px;padding:14px 16px;text-align:start;width:100%;font-size:var(--fs-body);border-top:1px solid var(--line)}
+.opt:first-child{border-top:0}
+.opt:active{background:var(--surface-2)}
+.opt .oi{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);flex:none}
+.opt .oi .ico{width:1.15rem;height:1.15rem}
+.opt .ot{flex:1;min-width:0}
+.opt .ot small{display:block;color:var(--text-3);font-size:var(--fs-caption);line-height:1.35;margin-top:1px}
+.opt.danger{color:var(--danger)}
+.opt.danger .oi{background:var(--danger-soft);color:var(--danger)}
+.sect{margin:18px 4px 8px;font-size:var(--fs-micro);font-weight:600;color:var(--text-3);letter-spacing:.05em;text-transform:uppercase}
+.safety{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 12px;font-family:var(--mono);font-size:1.0625rem;letter-spacing:.06em;text-align:center;font-variant-numeric:tabular-nums;padding:6px 0 2px}
+.sheet .cancel{margin-top:10px}
+.dialog{position:fixed;left:50%;top:50%;z-index:61;width:min(86vw,330px);transform:translate(-50%,-50%) scale(.96);opacity:0;transition:opacity .18s,transform .18s;background:var(--elev);border-radius:var(--r-lg);padding:22px 20px 16px;box-shadow:var(--shadow);text-align:center}
+.dialog.show{opacity:1;transform:translate(-50%,-50%)}
+.dialog h3{margin:0 0 8px;font-size:var(--fs-title);font-weight:600;line-height:1.3}
+.dialog p{margin:0 0 18px;color:var(--text-2);font-size:var(--fs-callout);line-height:1.45;text-wrap:pretty}
+.dialog .actions{margin-top:0;gap:8px}
+.dialog .btn{height:48px}
+.scrim.top{z-index:60}
+.viewer{position:fixed;inset:0;z-index:40;background:#000;display:flex;flex-direction:column;animation:in .2s}
+.viewer .vbar{display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top)) 10px 8px;color:#fff;position:relative;z-index:2;background:linear-gradient(rgba(0,0,0,.6),transparent)}
+.viewer .vbar .tb{color:#fff}
+.viewer .vbar .vt{flex:1;min-width:0;font-size:var(--fs-caption);line-height:1.3;text-align:center}
+.viewer .vbar .vt b{display:block;font-size:var(--fs-callout);font-weight:600}
+.viewer .stage{flex:1;display:grid;place-items:center;min-height:0;margin-top:-56px}
+.viewer img,.viewer video{max-width:100%;max-height:100%;object-fit:contain}
+.toast{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top));z-index:70;transform:translate(-50%,-140%);opacity:0;visibility:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .2s,visibility .3s;background:var(--text);color:var(--bg);padding:11px 18px;border-radius:22px;font-size:var(--fs-caption);font-weight:500;line-height:1.35;max-width:90vw;box-shadow:var(--shadow);text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+.hidden{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<input type="file" id="fCamera" class="hidden" accept="image/*,video/*" capture="environment">
+<input type="file" id="fLibrary" class="hidden" accept="image/*,video/*" multiple>
+<input type="file" id="fAudio" class="hidden" accept="audio/*">
+<script nonce="__NONCE__">
+'use strict';
+/* =====================================================================
+   pvtshiiiiii page. Runs inside Scriptable's WKWebView.
+   Talks to Supabase directly (fetch/XHR, CSP-limited to that origin) and
+   to Scriptable through a polled request queue (window.__drain / __ack).
+   ===================================================================== */
+const INIT = __INIT__;
+const CFG = INIT.cfg || {};
+const VERSION = INIT.version || '';
+const subtle = window.crypto && crypto.subtle;
+const te = new TextEncoder(), td = new TextDecoder();
+const BUCKET = 'pvt-media';
+const TTL = 864e5;                  // 24h message lifetime
+const MAX_VIDEO = 45 * 1048576;     // bucket cap is 50 MB; leave headroom
+const MAX_VOICE_MS = 5 * 60 * 1000;
+const KDF_ITER = 600000;            // PBKDF2-SHA256 (OWASP 2023 guidance)
+const AUTOLOCK_MS = 60 * 1000;
+
+const ST = {
+  session: (INIT.store && INIT.store.session) || null,
+  space: (INIT.store && INIT.store.space) || null,
+  vault: (INIT.store && INIT.store.vault) || null,
+  lock: (INIT.store && INIT.store.lock) || { f: 0, u: 0 },
+  legacy: !!INIT.legacy,
+};
+let V = null;      // unlocked vault contents
+let WRAP = null;   // AES key derived from the passcode (memory only while unlocked)
+let MK = null;     // message key (memory only while unlocked)
+let LIST = [], BYID = new Map(), BYNONCE = new Map();
+let cursor = null, polling = false, pollTimer = null, partnerCount = 0, tick = 0, hiddenAt = 0, cleaned = false;
+
+class AppError extends Error {}
+
+/* ---------------- tiny DOM helpers ---------------- */
+const $ = (s, r) => (r || document).querySelector(s);
+function h(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  if (props) for (const k in props) {
+    const v = props[k];
+    if (v == null || v === false) continue;
+    if (k === 'class') e.className = v;
+    else if (k === 'text') e.textContent = v;
+    else if (k === 'style') e.setAttribute('style', v);
+    else if (k.slice(0, 2) === 'on' && typeof v === 'function') e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v === true ? '' : v);
+  }
+  for (const c of kids.flat(3)) if (c != null && c !== false) e.append(c.nodeType ? c : document.createTextNode(String(c)));
+  return e;
+}
+const P = 'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+const SVG = {
+  lock: '<rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>',
+  shield: '<path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.4-4.6"/>',
+  shieldq: '<path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z"/><path d="M12 8v4.5M12 16h.01"/>',
+  timer: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9.5 2.5h5"/>',
+  link: '<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  mic: '<rect x="9" y="3" width="6" height="11.5" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
+  send: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+  camera: '<path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.7l1.3-2h5l1.3 2h1.7A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z"/><circle cx="12" cy="12.5" r="3.5"/>',
+  photo: '<rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4.5 17.5l5-4.5 3.5 3 2.5-2 4 3.5"/>',
+  wave: '<path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10v4"/>',
+  play: '<path d="M7 4.5v15l12-7.5z" fill="currentColor"/>',
+  pause: '<path d="M7.5 5v14M16.5 5v14" stroke-width="3.2"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>',
+  more: '<circle cx="5.5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="18.5" cy="12" r="1.3" fill="currentColor"/>',
+  share: '<path d="M12 15V3.5M7.5 8L12 3.5 16.5 8"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/>',
+  copy: '<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/>',
+  paste: '<rect x="5" y="4.5" width="14" height="16.5" rx="2.5"/><path d="M9 4.5V3.5h6v1"/><path d="M9 11h6M9 15h4"/>',
+  refresh: '<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/>',
+  trash: '<path d="M4.5 7h15M10 11v6M14 11v6"/><path d="M6.5 7l1 12.5A2 2 0 0 0 9.5 21h5a2 2 0 0 0 2-1.5L17.5 7M9.5 7V4.5h5V7"/>',
+  del: '<path d="M9 5h10.5A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5H9l-6-7z"/><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"/>',
+  user: '<circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
+  alert: '<path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.5h.01"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  key: '<circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3M16.5 6.5l2.5 2.5"/>',
+  file: '<path d="M14 3.5H7.5A2.5 2.5 0 0 0 5 6v12a2.5 2.5 0 0 0 2.5 2.5h9A2.5 2.5 0 0 0 19 18V8.5z"/><path d="M14 3.5v5h5"/>',
+};
+function icon(name) { const s = h('span', { class: 'ico', 'aria-hidden': 'true' }); s.innerHTML = '<svg viewBox="0 0 24 24" ' + P + '>' + SVG[name] + '</svg>'; return s; }
+function mount(node) { const r = $('#root'); r.replaceChildren(node); return node; }
+let toastT = 0;
+function toast(msg, ms) {
+  let t = $('.toast');
+  if (!t) { t = h('div', { class: 'toast', role: 'status', 'aria-live': 'polite' }); document.body.append(t); }
+  t.textContent = msg;
+  requestAnimationFrame(() => t.classList.add('show'));
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove('show'), ms || 2800);
+}
+function friendly(e) {
+  const m = String((e && e.message) || e || 'Something went wrong');
+  if (/invalid or expired invite/i.test(m)) return 'That invite is invalid or expired. Ask for a new one.';
+  if (/already full/i.test(m)) return 'That space already has two people.';
+  if (/Failed to fetch|Network|Load failed/i.test(m)) return 'Can’t reach the server. Check your connection.';
+  if (/anonymous sign-ins are disabled/i.test(m)) return 'Enable anonymous sign-ins in Supabase (Authentication › Providers).';
+  if (/bucket not found|publish_key|handshakes/i.test(m)) return 'The server is missing the v2 setup. Run supabase/002_keys_and_media.sql.';
+  return m.length > 160 ? m.slice(0, 157) + '…' : m;
+}
+
+/* ---------------- bridge to Scriptable ---------------- */
+const OUT = []; let seq = 0; const waits = {};
+window.__drain = function () {
+  // Cap each drain at ~1.5 MB so big exports stream in pieces instead of one huge string.
+  const o = []; let size = 0;
+  while (OUT.length && size < 1.5e6) { const x = OUT.shift(); size += (x.d ? x.d.length : 0) + 200; o.push(x); }
+  return JSON.stringify(o);
+};
+window.__ack = function (id, err, val) {
+  const w = waits[id]; if (!w) return;
+  delete waits[id]; clearTimeout(w.t);
+  if (err) w.rej(new AppError(err)); else w.res(val);
+};
+function call(t, data, timeout) {
+  const id = ++seq;
+  OUT.push(Object.assign({ id, t }, data || {}));
+  return new Promise((res, rej) => {
+    waits[id] = { res, rej, t: setTimeout(() => { if (waits[id]) { delete waits[id]; rej(new AppError('Scriptable did not respond. Close and reopen the app.')); } }, timeout || 8000) };
+  });
+}
+const save = (k, v) => call('save', { k, v });
+
+/* ---------------- encoding ---------------- */
+function b64(buf) {
+  const b = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
+  let s = '';
+  for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+function unb64(t) { const s = atob(t), b = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) b[i] = s.charCodeAt(i); return b; }
+const b64u = (buf) => b64(buf).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+function unb64u(t) { t = String(t).replace(/-/g, '+').replace(/_/g, '/'); while (t.length % 4) t += '='; return unb64(t); }
+const rnd = (n) => crypto.getRandomValues(new Uint8Array(n));
+const cat = (...a) => { const o = new Uint8Array(a.reduce((n, x) => n + x.length, 0)); let i = 0; for (const x of a) { o.set(x, i); i += x.length; } return o; };
+const sha = async (b) => new Uint8Array(await subtle.digest('SHA-256', b));
+function ctEq(a, b) { if (a.length !== b.length) return false; let d = 0; for (let i = 0; i < a.length; i++) d |= a[i] ^ b[i]; return d === 0; }
+
+/* ---------------- crypto ---------------- */
+const aesKey = (raw, use) => subtle.importKey('raw', raw, 'AES-GCM', false, use || ['encrypt', 'decrypt']);
+async function seal(key, plain, aad) {
+  const iv = rnd(12);
+  const ct = new Uint8Array(await subtle.encrypt({ name: 'AES-GCM', iv, additionalData: te.encode(aad) }, key, plain));
+  return cat(iv, ct);
+}
+async function unseal(key, blob, aad) {
+  return new Uint8Array(await subtle.decrypt({ name: 'AES-GCM', iv: blob.subarray(0, 12), additionalData: te.encode(aad) }, key, blob.subarray(12)));
+}
+async function passKey(pass, salt, iter) {
+  const k = await subtle.importKey('raw', te.encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return subtle.deriveKey({ name: 'PBKDF2', salt, iterations: iter, hash: 'SHA-256' }, k, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+async function genKeyPair() {
+  const kp = await subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveBits']);
+  return { priv: await subtle.exportKey('jwk', kp.privateKey), pub: b64u(await subtle.exportKey('raw', kp.publicKey)) };
+}
+async function deriveMessageKey(privJwk, peerPub, space) {
+  const priv = await subtle.importKey('jwk', privJwk, { name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveBits']);
+  const pub = await subtle.importKey('raw', unb64u(peerPub), { name: 'ECDH', namedCurve: 'P-256' }, false, []);
+  const shared = await subtle.deriveBits({ name: 'ECDH', public: pub }, priv, 256);
+  const hk = await subtle.importKey('raw', shared, 'HKDF', false, ['deriveBits']);
+  const bits = await subtle.deriveBits({ name: 'HKDF', hash: 'SHA-256', salt: te.encode('pvtshiiiiii/v2/' + space), info: te.encode('message-key') }, hk, 256);
+  return b64u(bits);
+}
+async function hmac(secret, msg) {
+  const k = await subtle.importKey('raw', unb64u(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return new Uint8Array(await subtle.sign('HMAC', k, te.encode(msg)));
+}
+const joinMsg = (space, pub) => 'pvt2-join|' + space + '|' + pub;
+async function fingerprint(pub) { return b64u((await sha(unb64u(pub))).subarray(0, 16)); }
+async function safetyNumber(a, b) {
+  const [x, y] = [a, b].sort();
+  const d = await sha(cat(unb64u(x), unb64u(y)));
+  const groups = [];
+  for (let i = 0; i < 6; i++) groups.push(String(((d[i * 3] << 16) | (d[i * 3 + 1] << 8) | d[i * 3 + 2]) % 100000).padStart(5, '0'));
+  return groups;
+}
+
+/* ---------------- vault (passcode-sealed secrets) ---------------- */
+async function sealVault() {
+  if (!WRAP || !V) throw new AppError('Locked');
+  const blob = await seal(WRAP, te.encode(JSON.stringify(V)), 'pvt-vault-v1');
+  ST.vault = { v: 1, m: ST.vault ? ST.vault.m : 'n', salt: ST.vault.salt, it: ST.vault.it, c: b64(blob) };
+  await save('vault', ST.vault);
+}
+async function createVault(pass, mode, contents) {
+  const salt = rnd(16);
+  WRAP = await passKey(pass, salt, KDF_ITER);
+  ST.vault = { v: 1, m: mode, salt: b64(salt), it: KDF_ITER };
+  V = contents;
+  await sealVault();
+}
+async function openVault(pass) {
+  const key = await passKey(pass, unb64(ST.vault.salt), ST.vault.it);
+  try {
+    const plain = await unseal(key, unb64(ST.vault.c), 'pvt-vault-v1');
+    WRAP = key; V = JSON.parse(td.decode(plain));
+    return true;
+  } catch (e) { return false; }
+}
+
+/* ---------------- Supabase ---------------- */
+function jwtExp(t) { try { return JSON.parse(atob(t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))).exp * 1000; } catch (e) { return 0; } }
+let refreshing = null;
+async function refreshSession() {
+  // The widget may have rotated the refresh token in the Keychain; use that before refreshing ourselves.
+  try {
+    const k = await call('load', { k: 'session' });
+    if (k && k.access_token && k.access_token !== ST.session.access_token && jwtExp(k.access_token) > Date.now() + 60000) { ST.session = k; return; }
+    if (k && k.refresh_token) ST.session.refresh_token = k.refresh_token;
+  } catch (e) { /* fall through */ }
+  const r = await fetch(CFG.url + '/auth/v1/token?grant_type=refresh_token', {
+    method: 'POST', headers: { apikey: CFG.key, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ refresh_token: ST.session.refresh_token }),
+  });
+  const j = await r.json().catch(() => null);
+  if (!r.ok || !j || !j.access_token) throw new AppError('Your sign-in expired. Reset this phone in Settings and pair again.');
+  ST.session = { access_token: j.access_token, refresh_token: j.refresh_token, user_id: ST.session.user_id };
+  await save('session', ST.session);
+}
+function refreshOnce() { return refreshing || (refreshing = refreshSession().finally(() => { refreshing = null; })); }
+async function fresh() { if (ST.session && jwtExp(ST.session.access_token) < Date.now() + 60000) await refreshOnce(); }
+function authHeaders() { return { apikey: CFG.key, Authorization: 'Bearer ' + (ST.session ? ST.session.access_token : CFG.key) }; }
+async function api(path, opt, retried) {
+  opt = opt || {};
+  await fresh();
+  const headers = Object.assign({ 'Content-Type': 'application/json' }, authHeaders(), opt.headers || {});
+  const r = await fetch(CFG.url + path, { method: opt.method || 'GET', headers, body: opt.body });
+  if (r.status === 401 && ST.session && !retried) { await refreshOnce(); return api(path, opt, true); }
+  const t = await r.text(); let j = null; try { j = t ? JSON.parse(t) : null; } catch (e) { /* not JSON */ }
+  if (!r.ok) throw new AppError((j && (j.message || j.msg || j.error_description || j.error)) || ('HTTP ' + r.status));
+  return j;
+}
+const rpc = (fn, args) => api('/rest/v1/rpc/' + fn, { method: 'POST', body: JSON.stringify(args || {}) });
+async function signIn() {
+  if (ST.session) {
+    try { await fresh(); return; }
+    catch (e) { ST.session = null; await save('session', null); } // refresh token dead: start a new anonymous user
+  }
+  const j = await api('/auth/v1/signup', { method: 'POST', body: '{}' });
+  if (!j || !j.access_token) throw new AppError('Sign-in failed');
+  ST.session = { access_token: j.access_token, refresh_token: j.refresh_token, user_id: j.user.id };
+  await save('session', ST.session);
+}
+function xhr(method, path, opt, retried) {
+  opt = opt || {};
+  return fresh().then(() => new Promise((res, rej) => {
+    const x = new XMLHttpRequest();
+    x.open(method, CFG.url + path);
+    const hd = authHeaders(); for (const k in hd) x.setRequestHeader(k, hd[k]);
+    if (opt.type) x.setRequestHeader('Content-Type', opt.type);
+    if (opt.responseType) x.responseType = opt.responseType;
+    x.timeout = 10 * 60 * 1000;
+    if (opt.onp) (method === 'GET' ? x : x.upload).onprogress = (e) => { if (e.lengthComputable) opt.onp(e.loaded / e.total); };
+    x.onload = () => res(x);
+    x.onerror = () => rej(new AppError('Network error'));
+    x.ontimeout = () => rej(new AppError('The transfer timed out'));
+    x.send(opt.body || null);
+  })).then((x) => {
+    if ((x.status === 401 || x.status === 400 && /jwt|token/i.test(x.responseType ? '' : x.responseText)) && !retried) return refreshOnce().then(() => xhr(method, path, opt, true));
+    if (x.status < 200 || x.status >= 300) {
+      let msg = 'HTTP ' + x.status;
+      try { if (!x.responseType) { const j = JSON.parse(x.responseText); msg = j.message || j.error || msg; } } catch (e) { /* ignore */ }
+      throw new AppError(msg);
+    }
+    return x;
+  });
+}
+
+/* ---------------- passcode lockout (persisted) ---------------- */
+function lockWait() { return Math.max(0, (ST.lock.u || 0) - Date.now()); }
+async function recordFail() {
+  const f = (ST.lock.f || 0) + 1;
+  const wait = f >= 5 ? Math.min(3600e3, 30e3 * Math.pow(2, f - 5)) : 0;
+  ST.lock = { f, u: wait ? Date.now() + wait : 0 };
+  await save('lock', ST.lock).catch(() => {});
+}
+async function clearFails() { if (ST.lock.f) { ST.lock = { f: 0, u: 0 }; await save('lock', ST.lock).catch(() => {}); } }
+function fmtWait(ms) { const s = Math.ceil(ms / 1000); return s >= 60 ? Math.ceil(s / 60) + ' min' : s + ' s'; }
+
+/* =====================================================================
+   SCREENS
+   ===================================================================== */
+function fatal(title, msg) {
+  mount(h('div', { class: 'view' }, h('div', { class: 'page' }, h('div', { class: 'grow' }),
+    h('div', { class: 'emblem danger' }, icon('alert')), h('h1', { text: title }), h('p', { class: 'lede', text: msg }), h('div', { class: 'grow' }))));
+}
+function busy(title, sub) {
+  mount(h('div', { class: 'view' }, h('div', { class: 'center' }, h('div', { class: 'spinner', role: 'progressbar', 'aria-label': title }),
+    h('b', { style: 'font-size:var(--fs-title);font-weight:600', text: title }), sub ? h('p', { text: sub }) : null)));
+}
+function failed(e, back) {
+  mount(h('div', { class: 'view' }, h('div', { class: 'page' }, h('div', { class: 'grow' }),
+    h('div', { class: 'emblem danger' }, icon('alert')), h('h1', { text: 'Something went wrong' }), h('p', { class: 'lede', text: friendly(e) }),
+    h('div', { class: 'grow' }), h('div', { class: 'actions' }, h('button', { class: 'btn pri', onclick: back || boot }, 'Try again')))));
+}
+
+function welcome() {
+  const feat = (ic, t, d) => h('li', null, h('span', { class: 'fi' }, icon(ic)), h('div', null, h('b', { text: t }), h('span', { class: 'd', text: d })));
+  mount(h('div', { class: 'view' }, h('div', { class: 'page' },
+    h('div', { class: 'grow', style: 'max-height:8vh' }),
+    h('div', { class: 'emblem' }, icon('lock')),
+    h('h1', { text: 'pvtshiiiiii', translate: 'no' }),
+    h('p', { class: 'lede', text: 'A private space for two. Only your phones can read what you send.' }),
+    h('ul', { class: 'features' },
+      feat('shield', 'End-to-end encrypted', 'Messages, photos, videos and voice notes are encrypted on your phone.'),
+      feat('timer', 'Gone in 24 hours', 'Everything disappears from the server after a day.'),
+      feat('key', 'Verified pairing', 'Compare a safety number to be sure nobody is in the middle.')),
+    h('div', { class: 'grow' }),
+    h('div', { class: 'actions' },
+      h('button', { class: 'btn pri', onclick: () => passcodeSetup(createFlow, welcome) }, 'Create a space'),
+      h('button', { class: 'btn', onclick: joinScreen }, 'Join with an invite')))));
+}
+
+function upgradeScreen() {
+  mount(h('div', { class: 'view' }, h('div', { class: 'page' },
+    h('div', { class: 'grow', style: 'max-height:8vh' }),
+    h('div', { class: 'emblem warn' }, icon('shield')),
+    h('h1', { text: 'Security upgrade' }),
+    h('p', { class: 'lede', text: 'This version replaces the old shared-key invite with a verified key exchange, a passcode-sealed vault and encrypted media.' }),
+    h('ul', { class: 'features' },
+      h('li', null, h('span', { class: 'fi' }, icon('refresh')), h('div', null, h('b', { text: 'Pair once more' }), h('span', { class: 'd', text: 'Both phones create or join a new space. The old key is deleted from this phone.' }))),
+      h('li', null, h('span', { class: 'fi' }, icon('clock')), h('div', null, h('b', { text: 'Old messages stay unreadable' }), h('span', { class: 'd', text: 'They expire within 24 hours anyway.' })))),
+    h('div', { class: 'grow' }),
+    h('div', { class: 'actions' }, h('button', { class: 'btn pri', onclick: async () => {
+      try { await call('dropLegacy'); ST.legacy = false; ST.space = null; welcome(); } catch (e) { failed(e, upgradeScreen); }
+    } }, 'Upgrade and pair again')))));
+}
+
+/* ---------------- passcode ---------------- */
+function passcodeView(opts) {
+  // opts: {title, lede, mode:'n'|'a', allowSwitch, onSubmit(code) -> Promise<string|null error>, back}
+  let mode = opts.mode || 'n', code = '';
+  const view = h('div', { class: 'view' });
+  function draw(errText) {
+    code = '';
+    const err = h('p', { class: 'err', role: 'alert', text: errText || '' });
+    const dots = h('div', { class: 'dots', 'aria-hidden': 'true' }, [0, 1, 2, 3, 4, 5].map(() => h('i')));
+    const setDots = () => [...dots.children].forEach((d, i) => d.classList.toggle('on', i < code.length));
+    let working = false;
+    async function submit(val) {
+      if (working) return; working = true;
+      const wait = lockWait();
+      if (wait && opts.lockout) { err.textContent = 'Too many attempts. Try again in ' + fmtWait(wait) + '.'; code = ''; setDots(); working = false; return; }
+      err.textContent = opts.lockout ? 'Unlocking…' : '';
+      err.style.color = 'var(--text-3)';
+      const res = await opts.onSubmit(val, mode);
+      err.style.color = '';
+      working = false;
+      if (res) { err.textContent = res; dots.classList.remove('shake'); void dots.offsetWidth; dots.classList.add('shake'); code = ''; setDots(); const a = $('input', view); if (a) { a.value = ''; a.focus(); } }
+    }
+    const press = (d) => { if (code.length >= 6) return; code += d; setDots(); if (code.length === 6) setTimeout(() => submit(code), 90); };
+    const del = () => { code = code.slice(0, -1); setDots(); };
+    const kp = (n, l) => h('button', { class: 'key', 'aria-label': n, onclick: () => press(n) }, n, l ? h('small', { text: l }) : null);
+    const body = h('div', { class: 'pc' },
+      opts.back ? h('button', { class: 'back', style: 'align-self:flex-start', onclick: opts.back }, icon('back'), 'Back') : null,
+      h('div', { class: 'emblem' }, icon('lock')),
+      h('h1', { text: opts.title }),
+      h('p', { class: 'lede', text: opts.lede }));
+    if (mode === 'n') {
+      body.append(dots, err, h('div', { class: 'keypad' },
+        kp('1'), kp('2', 'ABC'), kp('3', 'DEF'), kp('4', 'GHI'), kp('5', 'JKL'), kp('6', 'MNO'), kp('7', 'PQRS'), kp('8', 'TUV'), kp('9', 'WXYZ'),
+        opts.allowSwitch ? h('button', { class: 'key fn', onclick: () => { mode = 'a'; draw(); } }, 'ABC') : h('span'),
+        kp('0'),
+        h('button', { class: 'key fn', 'aria-label': 'Delete', onclick: del }, icon('del'))));
+    } else {
+      const inp = h('input', { class: 'field', type: 'password', autocomplete: 'off', autocapitalize: 'off', autocorrect: 'off', spellcheck: 'false', 'aria-label': 'Passcode', placeholder: 'Passcode' });
+      inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(inp.value); });
+      body.append(h('div', { class: 'alpha' }, inp, err, h('button', { class: 'btn pri', onclick: () => submit(inp.value) }, 'Continue')),
+        opts.allowSwitch ? h('button', { class: 'switch-mode', onclick: () => { mode = 'n'; draw(); } }, 'Use a 6-digit code instead') : null);
+      setTimeout(() => inp.focus(), 250);
+    }
+    view.replaceChildren(body);
+  }
+  draw(opts.initialError);
+  return mount(view);
+}
+
+function passcodeSetup(then, back) {
+  let first = null;
+  passcodeView({
+    title: 'Create a passcode', lede: 'It seals your keys on this phone. There is no recovery if you forget it.',
+    allowSwitch: true, back,
+    onSubmit: async (val, mode) => {
+      if (mode === 'n' && !/^\d{6}$/.test(val)) return 'Enter 6 digits.';
+      if (mode === 'a' && val.length < 8) return 'Use at least 8 characters.';
+      if (/^(\d)\1{5}$|^(012345|123456|234567|345678|456789|987654|654321)$/.test(val)) return 'Too easy to guess. Choose another.';
+      first = { val, mode };
+      passcodeView({
+        title: 'Confirm passcode', lede: 'Enter it once more.', mode, back: () => passcodeSetup(then, back),
+        onSubmit: async (v2) => {
+          if (v2 !== first.val) return 'Passcodes don’t match.';
+          busy('Securing this phone', 'Deriving your vault key…');
+          then(first.val, first.mode);
+          return null;
+        },
+      });
+      return null;
+    },
+  });
+}
+
+function lockScreen(msg) {
+  const v = passcodeView({
+    title: 'Enter passcode', lede: 'Unlock to read your messages.', mode: ST.vault.m || 'n', lockout: true,
+    initialError: msg || (lockWait() ? 'Too many attempts. Try again in ' + fmtWait(lockWait()) + '.' : ''),
+    onSubmit: async (val) => {
+      if (!val) return 'Enter your passcode.';
+      const ok = await openVault(val);
+      if (!ok) { await recordFail(); const w = lockWait(); return w ? 'Wrong passcode. Locked for ' + fmtWait(w) + '.' : 'Wrong passcode.'; }
+      await clearFails();
+      try { await afterUnlock(); } catch (e) { failed(e, boot); }
+      return null;
+    },
+  });
+  const pc = $('.pc', v);
+  if (pc) pc.append(h('button', { class: 'switch-mode', style: 'margin-top:14px', onclick: resetPhone }, 'Forgot passcode?'));
+}
+async function resetPhone() {
+  if (!(await confirmDialog('Reset this phone?', 'This deletes your keys, passcode and pairing from this phone. You’ll need a new invite to chat again. This can’t be undone.', 'Reset', true))) return;
+  try {
+    await call('wipe');
+    ST.session = null; ST.space = null; ST.vault = null; ST.lock = { f: 0, u: 0 };
+    lockNow(true); closeSheet(true); welcome();
+  } catch (e) { toast(friendly(e)); }
+}
+
+/* ---------------- create / join / invite ---------------- */
+async function createFlow(pass, mode) {
+  try {
+    const kp = await genKeyPair();
+    await signIn();
+    const r = await rpc('create_space');
+    await createVault(pass, mode, { space: r.space_id, role: 'c', priv: kp.priv, pub: kp.pub, published: false, secrets: [], name: '', verified: false });
+    ST.space = r.space_id; await save('space', r.space_id);
+    await publishKey();
+    const inv = await addInviteSecret(r.code);
+    await enterChat(false);
+    inviteSheet(inv);
+  } catch (e) { WRAP = null; V = null; failed(e, welcome); }
+}
+async function publishKey(mac) {
+  await rpc('publish_key', { p_space: V.space, p_payload: JSON.stringify(mac ? { v: 2, pub: V.pub, mac } : { v: 2, pub: V.pub }) });
+  if (!V.published) { V.published = true; await sealVault(); }
+}
+async function addInviteSecret(code) {
+  const s = b64u(rnd(16));
+  V.secrets = (V.secrets || []).concat([{ s, at: Date.now() }]).slice(-8);
+  await sealVault();
+  return 'PVT2.' + code + '.' + (await fingerprint(V.pub)) + '.' + s;
+}
+function parseInvite(v) {
+  const p = String(v || '').replace(/\s+/g, '').split('.');
+  if (p.length !== 4 || p[0] !== 'PVT2' || !/^[A-Za-z0-9]{6,20}$/.test(p[1]) || p[2].length !== 22 || p[3].length !== 22) return null;
+  return { code: p[1], fp: p[2], s: p[3] };
+}
+
+function joinScreen() {
+  const ta = h('textarea', { class: 'field', placeholder: 'PVT2.XXXXXXXXXX.…', autocapitalize: 'off', autocorrect: 'off', spellcheck: 'false', 'aria-label': 'Invite' });
+  const err = h('p', { class: 'err', role: 'alert' });
+  const go = () => {
+    const inv = parseInvite(ta.value);
+    if (!inv) { err.textContent = /^\s*[A-Z0-9]{10}\.[A-Za-z0-9_-]{43}\s*$/.test(ta.value) ? 'That is an old-style invite. Ask your partner to update and send a new one.' : 'That doesn’t look like a pvtshiiiiii invite.'; return; }
+    passcodeSetup((pass, mode) => joinFlow(inv, pass, mode), joinScreen);
+  };
+  mount(h('div', { class: 'view' }, h('div', { class: 'page' },
+    h('button', { class: 'back', onclick: welcome }, icon('back'), 'Back'),
+    h('h1', { text: 'Join a space' }),
+    h('p', { class: 'lede', text: 'Paste the invite your partner sent. It works once, for 10 minutes.' }),
+    h('div', { style: 'margin-top:22px' }, ta, err),
+    h('button', { class: 'btn', style: 'margin-top:6px', onclick: async () => { try { const t = await call('paste'); if (t) { ta.value = t.trim(); err.textContent = ''; } else toast('Clipboard is empty'); } catch (e) { ta.focus(); } } }, icon('paste'), 'Paste from clipboard'),
+    h('div', { class: 'grow' }),
+    h('div', { class: 'actions' }, h('button', { class: 'btn pri', onclick: go }, 'Continue')))));
+}
+
+async function joinFlow(inv, pass, mode) {
+  try {
+    const kp = await genKeyPair();
+    await signIn();
+    const sid = await rpc('join_space', { p_code: inv.code });
+    await createVault(pass, mode, { space: sid, role: 'j', priv: kp.priv, pub: kp.pub, inv: { fp: inv.fp, s: inv.s }, published: false, name: '', verified: false });
+    ST.space = sid; await save('space', sid);
+    busy('Verifying your partner', 'Checking their key against the invite…');
+    await handshake();
+    await enterChat(true);
+  } catch (e) { WRAP = null; V = null; failed(e, welcome); }
+}
+
+/* Key agreement. Creator: verify the joiner's HMAC (proves they hold the invite secret).
+   Joiner: verify the creator's key matches the invite fingerprint, then publish its own key + HMAC. */
+async function handshake() {
+  if (!V || V.mk || V.alert) return;
+  if (!V.published && V.role === 'c') await publishKey();
+  const rows = await api('/rest/v1/handshakes?select=user_id,payload&space_id=eq.' + V.space);
+  const other = (rows || []).find((r) => r.user_id !== ST.session.user_id);
+  if (!other) return;
+  let p; try { p = JSON.parse(other.payload); } catch (e) { return; }
+  if (!p || typeof p.pub !== 'string') return;
+  if (V.role === 'j') {
+    if (!ctEq(te.encode(await fingerprint(p.pub)), te.encode(V.inv.fp))) {
+      V.alert = 'fpmismatch'; await sealVault();
+      throw new AppError('The server returned a key that does not match your invite. Do not use this space; ask for a new invite.');
+    }
+    const mac = b64u(await hmac(V.inv.s, joinMsg(V.space, V.pub)));
+    await publishKey(mac);
+    V.mk = await deriveMessageKey(V.priv, p.pub, V.space);
+    V.peer = p.pub; delete V.inv; await sealVault();
+  } else {
+    if (typeof p.mac !== 'string') return;
+    let ok = false, mac;
+    try { mac = unb64u(p.mac); } catch (e) { mac = new Uint8Array(0); }
+    for (const x of V.secrets || []) if (ctEq(await hmac(x.s, joinMsg(V.space, p.pub)), mac)) ok = true;
+    if (!ok) { V.alert = 'badjoin'; await sealVault(); renderChrome(); return; }
+    V.mk = await deriveMessageKey(V.priv, p.pub, V.space);
+    V.peer = p.pub; V.secrets = []; await sealVault();
+  }
+  MK = await aesKey(unb64u(V.mk));
+  renderChrome();
+  toast('Paired. You’re end-to-end encrypted.');
+}
+async function checkPeerKey() {
+  if (!V || !V.peer) return;
+  try {
+    const rows = await api('/rest/v1/handshakes?select=user_id,payload&space_id=eq.' + V.space);
+    const other = (rows || []).find((r) => r.user_id !== ST.session.user_id);
+    const p = other ? JSON.parse(other.payload) : null;
+    if (p && p.pub && p.pub !== V.peer && V.alert !== 'keychange') { V.alert = 'keychange'; await sealVault(); renderChrome(); }
+  } catch (e) { /* offline is fine */ }
+}
+
+function inviteSheet(invite) {
+  const code = h('div', { class: 'invite-code', text: invite, translate: 'no' });
+  let left = 600; const cd = h('span', { class: 'tnum' });
+  const upd = () => { cd.textContent = left > 0 ? Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0') : 'expired'; };
+  upd(); const t = setInterval(() => { left--; upd(); if (!document.body.contains(cd)) clearInterval(t); }, 1000);
+  sheet('Invite your partner', [
+    h('p', { class: 'hint', style: 'margin:-6px 4px 14px;font-size:var(--fs-callout);color:var(--text-2)', text: 'Send this privately. It works once and expires in 10 minutes. It contains no encryption key: your phones agree on one when they connect.' }),
+    h('div', { class: 'card' }, code, h('div', { style: 'margin-top:12px;display:flex;gap:8px;align-items:center' }, h('span', { class: 'pill neutral' }, icon('clock'), cd))),
+    h('div', { class: 'row-btns' },
+      h('button', { class: 'btn pri', onclick: () => call('share', { text: 'Join me on pvtshiiiiii. Open the app, tap “Join with an invite” and paste:\n\n' + invite }, 120000).catch(() => {}) }, icon('share'), 'Share'),
+      h('button', { class: 'btn', onclick: () => call('copy', { text: invite }).then(() => toast('Invite copied')).catch((e) => toast(friendly(e))) }, icon('copy'), 'Copy')),
+    h('button', { class: 'btn ghost', style: 'margin-top:6px', onclick: async () => {
+      try { const c = await rpc('new_invite', { p_space: V.space }); closeSheet(); inviteSheet(await addInviteSecret(c)); } catch (e) { toast(friendly(e)); }
+    } }, icon('refresh'), 'New invite'),
+  ]);
+}
+
+/* =====================================================================
+   CHAT
+   ===================================================================== */
+async function afterUnlock() {
+  if (!V.space || V.space !== ST.space) { ST.space = V.space; await save('space', V.space).catch(() => {}); }
+  if (V.mk) MK = await aesKey(unb64u(V.mk));
+  await enterChat(true);
+}
+
+async function enterChat(withPoll) {
+  LIST = []; BYID = new Map(); BYNONCE = new Map(); cursor = null; tick = 0; cleaned = false;
+  const list = h('div', { id: 'list', role: 'log', 'aria-live': 'polite' });
+  const view = h('div', { class: 'chat view' },
+    h('header', { class: 'topbar', id: 'topbar' }),
+    h('div', { id: 'banners' }),
+    list,
+    h('div', { class: 'composer', id: 'composer' }));
+  mount(view);
+  renderChrome();
+  drawComposer();
+  renderList();
+  if (MK && withPoll !== false) checkPeerKey();
+  startPolling();
+}
+
+function partnerName() { return (V && V.name) || 'Partner'; }
+function renderChrome() {
+  const tb = $('#topbar'); if (!tb || !V) return;
+  const paired = !!MK;
+  const st = !paired ? h('div', { class: 'st unv' }, icon('clock'), 'Waiting for your partner')
+    : V.verified ? h('div', { class: 'st' }, icon('shield'), 'Encrypted · verified')
+      : h('div', { class: 'st unv' }, icon('shieldq'), 'Encrypted · tap to verify');
+  tb.replaceChildren(
+    h('div', { class: 'avatar', 'aria-hidden': 'true', text: partnerName().trim().charAt(0).toUpperCase() || 'P' }),
+    h('button', { class: 'who', style: 'text-align:start', onclick: settingsSheet }, h('b', { text: partnerName() }), st),
+    h('button', { class: 'tb', 'aria-label': 'Lock', onclick: () => lockNow() }, icon('lock')),
+    h('button', { class: 'tb', 'aria-label': 'Settings', onclick: settingsSheet }, icon('more')));
+  const bn = $('#banners');
+  if (bn) {
+    bn.replaceChildren();
+    const ban = (cls, t, d) => bn.append(h('div', { class: 'banner ' + cls, role: 'alert' }, icon('alert'), h('div', null, h('b', { text: t }), d)));
+    if (V.alert === 'badjoin') ban('danger', 'Unverified device joined', 'Someone joined without your invite’s secret. Nothing is shared with them. Reset this phone and create a new space.');
+    if (V.alert === 'keychange') ban('danger', 'Your partner’s key changed', 'The server now shows a different key for your partner. Messages still use the original key. If they didn’t reinstall, someone may be interfering. Re-pair to be safe.');
+    if (V.alert === 'fpmismatch') ban('danger', 'Key mismatch', 'The key on the server does not match the invite. Reset this phone and ask for a new invite.');
+  }
+  const c = $('#composer'); if (c) c.classList.toggle('hidden', !paired);
+  renderList();
+}
+
+/* ---------------- polling ---------------- */
+function startPolling() { stopPolling(); poll(); pollTimer = setInterval(poll, 3000); }
+function stopPolling() { if (pollTimer) clearInterval(pollTimer); pollTimer = null; }
+async function poll() {
+  if (polling || !V) return;
+  polling = true;
+  try {
+    if (!MK) { await handshake(); if (!MK) return; }
+    const base = '/rest/v1/messages?select=id,sender_id,ciphertext,created_at,expires_at&space_id=eq.' + V.space;
+    let rows;
+    if (!cursor) {
+      rows = await api(base + '&expires_at=gt.' + encodeURIComponent(new Date().toISOString()) + '&order=created_at.desc&limit=300');
+      rows.reverse();
+    } else {
+      // overlap 5 s: a row that commits late with an earlier timestamp is still picked up (ids dedupe)
+      rows = await api(base + '&created_at=gte.' + encodeURIComponent(new Date(Date.parse(cursor) - 5000).toISOString()) + '&order=created_at.asc&limit=200');
+    }
+    if (rows && rows.length) { const last = rows[rows.length - 1].created_at; if (!cursor || Date.parse(last) > Date.parse(cursor)) cursor = last; await ingest(rows); }
+    if (++tick % 20 === 1) {
+      const m = await api('/rest/v1/members?select=user_id&space_id=eq.' + V.space);
+      partnerCount = (m || []).length;
+    }
+    if (tick % 20 === 0) renderList(); // refresh expiry labels, drop expired
+    if (!cleaned) { cleaned = true; cleanupMedia(); }
+  } catch (e) {
+    if (e instanceof AppError && /sign-in expired/.test(e.message)) toast(e.message, 5000);
+  } finally { polling = false; }
+}
+
+/* ---------------- messages ---------------- */
+const aadMsg = () => 'pvt2|' + V.space;
+async function encryptEnvelope(env) {
+  return 'v2.' + b64(await seal(MK, te.encode(JSON.stringify(env)), aadMsg()));
+}
+async function openRow(row) {
+  if (typeof row.ciphertext !== 'string' || row.ciphertext.slice(0, 3) !== 'v2.') return null;
+  try {
+    const env = JSON.parse(td.decode(await unseal(MK, unb64(row.ciphertext.slice(3)), aadMsg())));
+    if (env.v !== 2 || env.s !== row.sender_id) return null; // sender is bound inside the ciphertext
+    return env;
+  } catch (e) { return null; }
+}
+async function ingest(rows) {
+  let changed = false, newest = 0;
+  for (const r of rows) {
+    if (BYID.has(r.id)) continue;
+    const env = await openRow(r);
+    const created = Date.parse(r.created_at), expires = Date.parse(r.expires_at);
+    newest = Math.max(newest, created);
+    if (env && BYNONCE.has(env.n)) {
+      const local = BYNONCE.get(env.n);
+      if (local.id !== r.id && local.status !== 'sent') { BYID.delete(local.id); local.id = r.id; local.created = created; local.expires = expires; local.status = 'sent'; BYID.set(r.id, local); changed = true; }
+      else if (!BYID.has(r.id)) BYID.set(r.id, local); // replayed copy of a message we already have
+      continue;
+    }
+    const m = { id: r.id, me: r.sender_id === ST.session.user_id, created, expires, env, status: 'sent' };
+    BYID.set(r.id, m); if (env) BYNONCE.set(env.n, m);
+    LIST.push(m); changed = true;
+  }
+  if (changed) { LIST.sort((a, b) => a.created - b.created); renderList(true); }
+  if (newest) save('seen', new Date(newest + 1).toISOString()).catch(() => {});
+}
+
+async function postEnvelope(env) {
+  const ct = await encryptEnvelope(env);
+  const rows = await api('/rest/v1/messages', { method: 'POST', headers: { Prefer: 'return=representation' },
+    body: JSON.stringify({ space_id: V.space, message_type: 'text', ciphertext: ct, expires_at: new Date(Date.now() + TTL).toISOString() }) });
+  return rows;
+}
+function newEnvelope(type, extra) { return Object.assign({ v: 2, s: ST.session.user_id, n: b64u(rnd(12)), t: type, ts: Date.now() }, extra); }
+function addLocal(env, extra) {
+  const m = Object.assign({ id: 'local-' + env.n, me: true, created: Date.now(), expires: Date.now() + TTL, env, status: 'sending' }, extra || {});
+  BYID.set(m.id, m); BYNONCE.set(env.n, m); LIST.push(m); renderList(true, true);
+  return m;
+}
+function markFailed(m, e) { m.status = 'failed'; m.error = friendly(e); updateRow(m); toast('Not sent: ' + m.error, 4000); }
+
+async function sendText(text) {
+  const env = newEnvelope('text', { b: text });
+  const m = addLocal(env);
+  try { await ingest(await postEnvelope(env)); } catch (e) { markFailed(m, e); m.retry = () => sendRetry(m); }
+}
+async function sendRetry(m) {
+  m.status = 'sending'; updateRow(m);
+  try {
+    if (m.upload && !m.uploaded) await m.upload();
+    await ingest(await postEnvelope(m.env));
+  } catch (e) { markFailed(m, e); }
+}
+
+/* ---------------- list rendering (keyed, so media and audio survive updates) ---------------- */
+const fmtTime = (t) => new Date(t).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+function dayLabel(t) {
+  const d = new Date(t), n = new Date();
+  if (d.toDateString() === n.toDateString()) return 'Today';
+  const y = new Date(n); y.setDate(n.getDate() - 1);
+  return d.toDateString() === y.toDateString() ? 'Yesterday' : d.toLocaleDateString([], { weekday: 'long' });
+}
+function leftLabel(m) {
+  const ms = m.expires - Date.now(); if (ms <= 0) return null;
+  const hrs = Math.floor(ms / 36e5); return hrs >= 1 ? hrs + 'h' : Math.max(1, Math.floor(ms / 6e4)) + 'm';
+}
+function renderList(newItems, forceBottom) {
+  const L = $('#list'); if (!L || !V) return;
+  const atBottom = L.scrollHeight - L.scrollTop - L.clientHeight < 140;
+  const now = Date.now();
+  for (const m of LIST) if (m.expires <= now && m.status === 'sent') { if (m.node) m.node.remove(); if (m.url) URL.revokeObjectURL(m.url); m.dead = true; }
+  LIST = LIST.filter((m) => !m.dead);
+  let empty = $('.empty', L);
+  if (!LIST.length) {
+    if (!empty) { L.replaceChildren(emptyState()); }
+    else empty.replaceWith(emptyState());
+    return;
+  }
+  if (empty) empty.remove();
+  let at = L.firstChild;
+  for (let i = 0; i < LIST.length; i++) {
+    const m = LIST[i], prev = LIST[i - 1], next = LIST[i + 1];
+    if (!m.node) m.node = buildRow(m);
+    if (m.node !== at) L.insertBefore(m.node, at); else at = at.nextSibling;
+    const newDay = !prev || dayLabel(prev.created) !== dayLabel(m.created);
+    const gs = newDay || prev.me !== m.me || m.created - prev.created > 5 * 6e4;
+    const ge = !next || next.me !== m.me || next.created - m.created > 5 * 6e4 || dayLabel(next.created) !== dayLabel(m.created) || m.status !== 'sent';
+    m.node.classList.toggle('gs', gs); m.node.classList.toggle('ge', ge);
+    const ds = m.node.firstChild; ds.classList.toggle('hidden', !newDay); if (newDay) ds.textContent = dayLabel(m.created);
+    if (ge) updateMeta(m);
+  }
+  if (forceBottom || (newItems && atBottom)) requestAnimationFrame(() => { L.scrollTop = L.scrollHeight; });
+}
+function emptyState() {
+  if (!MK) {
+    const creator = V.role === 'c';
+    return h('div', { class: 'empty' }, h('div', { class: 'emblem' }, icon(creator ? 'link' : 'clock')),
+      h('b', { text: creator ? 'Waiting for your partner' : 'Finishing pairing' }),
+      h('p', { text: creator ? 'Send them an invite. You can chat as soon as their phone joins and the keys are verified.' : 'Waiting for your partner’s phone to confirm. Keep the app open for a moment.' }),
+      creator && V.alert !== 'badjoin' ? h('button', { class: 'btn pri', onclick: async () => {
+        try { const c = await rpc('new_invite', { p_space: V.space }); inviteSheet(await addInviteSecret(c)); } catch (e) { toast(friendly(e)); }
+      } }, icon('share'), 'Send invite') : null);
+  }
+  return h('div', { class: 'empty' }, h('div', { class: 'emblem' }, icon('shield')),
+    h('b', { text: 'Say something' }),
+    h('p', { text: 'Messages, photos, videos and voice notes are end-to-end encrypted and disappear after 24 hours.' }));
+}
+function updateMeta(m) {
+  const meta = m.node.lastChild;
+  const kids = [h('span', { class: 'tnum', text: fmtTime(m.created) })];
+  if (m.status === 'sending') kids.push(h('span', { text: '·' }), h('span', { text: 'Sending…' }));
+  else if (m.status === 'failed') kids.push(h('span', { text: '·' }), h('button', { class: 'fail', onclick: () => m.retry ? m.retry() : sendRetry(m) }, 'Not sent · Retry'));
+  else { const l = leftLabel(m); if (l) kids.push(h('span', { text: '·' }), icon('timer'), h('span', { class: 'tnum', text: l })); }
+  meta.replaceChildren(...kids);
+}
+function updateRow(m) { if (!m.node) return; renderList(); updateMeta(m); }
+function buildRow(m) {
+  const row = h('div', { class: 'msg' + (m.me ? ' me' : '') }, h('div', { class: 'daysep hidden' }));
+  row.append(buildBubble(m), h('div', { class: 'meta' }));
+  return row;
+}
+function buildBubble(m) {
+  const e = m.env;
+  if (!e) return h('div', { class: 'bub bad' }, icon('lock'), 'Couldn’t decrypt this message');
+  if (e.t === 'text') return h('div', { class: 'bub', text: String(e.b || '') });
+  if (e.t === 'image' || e.t === 'video') return mediaBubble(m);
+  if (e.t === 'voice') return voiceBubble(m);
+  return h('div', { class: 'bub bad' }, 'Unsupported message');
+}
+
+/* ---------------- media: encrypt, upload, download ---------------- */
+const SAFE_MIME = /^(image\/(jpeg|png|gif|webp|heic|heif)|video\/(mp4|quicktime|webm)|audio\/(mp4|x-m4a|aac|mpeg|webm|ogg|wav|x-wav))$/;
+const safeMime = (t) => (SAFE_MIME.test(String(t || '').split(';')[0]) ? String(t).split(';')[0] : 'application/octet-stream');
+
+async function uploadEncrypted(bytes, onp) {
+  const fk = rnd(32), path = V.space + '/' + b64u(rnd(18));
+  const blob = await seal(await aesKey(fk, ['encrypt']), bytes, 'pvt2-media|' + path);
+  await xhr('POST', '/storage/v1/object/' + BUCKET + '/' + path, { body: blob, type: 'application/octet-stream', onp });
+  return { p: path, k: b64u(fk) };
+}
+async function fetchMedia(m, onp) {
+  if (m.url) return m.url;
+  if (m.loading) return m.loading;
+  const e = m.env;
+  if (typeof e.p !== 'string' || e.p.indexOf(V.space + '/') !== 0 || !/^[A-Za-z0-9_-]{16,40}$/.test(e.p.slice(V.space.length + 1)) || typeof e.k !== 'string' || e.k.length !== 43) throw new AppError('This attachment is malformed.');
+  m.loading = (async () => {
+    const x = await xhr('GET', '/storage/v1/object/authenticated/' + BUCKET + '/' + m.env.p, { responseType: 'arraybuffer', onp });
+    let plain;
+    try { plain = await unseal(await aesKey(unb64u(m.env.k), ['decrypt']), new Uint8Array(x.response), 'pvt2-media|' + m.env.p); }
+    catch (e) { throw new AppError('This file failed its integrity check.'); }
+    m.blob = new Blob([plain], { type: safeMime(m.env.mime) });
+    m.url = URL.createObjectURL(m.blob);
+    return m.url;
+  })();
+  try { return await m.loading; } catch (e) { if (/404|not found/i.test(e.message)) throw new AppError('This file has expired.'); throw e; } finally { m.loading = null; }
+}
+async function cleanupMedia() {
+  // Best effort: delete expired files in this space (uploader any time, partner after 24h).
+  try {
+    const items = await api('/storage/v1/object/list/' + BUCKET, { method: 'POST', body: JSON.stringify({ prefix: V.space, limit: 1000, offset: 0, sortBy: { column: 'created_at', order: 'asc' } }) });
+    const old = (items || []).filter((o) => o.created_at && Date.now() - Date.parse(o.created_at) > TTL + 6e4).map((o) => V.space + '/' + o.name);
+    if (old.length) await api('/storage/v1/object/' + BUCKET, { method: 'DELETE', body: JSON.stringify({ prefixes: old.slice(0, 100) }) });
+  } catch (e) { /* not critical */ }
+}
+
+function loadImg(src) { return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new AppError('Could not read this image')); i.src = src; }); }
+function toBlob(canvas, q) { return new Promise((res) => canvas.toBlob(res, 'image/jpeg', q)); }
+function drawScaled(src, w, h0, max) {
+  const s = Math.min(1, max / Math.max(w, h0));
+  const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * s)); c.height = Math.max(1, Math.round(h0 * s));
+  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+  return c;
+}
+async function prepImage(file) {
+  // Re-encoding through a canvas resizes for speed and strips EXIF (including GPS location).
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await loadImg(url);
+    const w = img.naturalWidth, hh = img.naturalHeight;
+    const full = await toBlob(drawScaled(img, w, hh, 2048), 0.86);
+    const thumb = drawScaled(img, w, hh, 40).toDataURL('image/jpeg', 0.5);
+    return { bytes: new Uint8Array(await full.arrayBuffer()), mime: 'image/jpeg', w, h: hh, thumb };
+  } finally { URL.revokeObjectURL(url); }
+}
+async function prepVideo(file) {
+  if (file.size > MAX_VIDEO) throw new AppError('Videos can be up to 45 MB. Trim it in Photos first.');
+  const url = URL.createObjectURL(file);
+  const meta = { w: 16, h: 9, dur: 0, thumb: null };
+  try {
+    await new Promise((res) => {
+      const v = document.createElement('video');
+      v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = url;
+      const done = () => res();
+      const t = setTimeout(done, 5000);
+      v.onloadedmetadata = () => { meta.w = v.videoWidth || 16; meta.h = v.videoHeight || 9; meta.dur = v.duration || 0; try { v.currentTime = Math.min(0.2, (v.duration || 1) / 2); } catch (e) { clearTimeout(t); done(); } };
+      v.onseeked = () => { try { meta.thumb = drawScaled(v, meta.w, meta.h, 48).toDataURL('image/jpeg', 0.55); } catch (e) { /* no thumb */ } clearTimeout(t); done(); };
+      v.onerror = () => { clearTimeout(t); done(); };
+    });
+  } finally { URL.revokeObjectURL(url); }
+  return Object.assign({ bytes: new Uint8Array(await file.arrayBuffer()), mime: safeMime(file.type || 'video/mp4') }, meta);
+}
+async function audioDuration(blob) {
+  const url = URL.createObjectURL(blob);
+  try {
+    return await new Promise((res) => {
+      const a = new Audio(); a.preload = 'metadata'; a.src = url;
+      const t = setTimeout(() => res(0), 4000);
+      a.onloadedmetadata = () => { clearTimeout(t); res(isFinite(a.duration) ? a.duration : 0); };
+      a.onerror = () => { clearTimeout(t); res(0); };
+    });
+  } finally { URL.revokeObjectURL(url); }
+}
+
+async function sendMedia(kind, prep) {
+  // Show the local copy immediately, then encrypt + upload with progress, then post the envelope.
+  const localBlob = new Blob([prep.bytes], { type: prep.mime });
+  const env = newEnvelope(kind, { mime: prep.mime, w: prep.w, h: prep.h, dur: prep.dur, th: prep.thumb, wave: prep.wave, size: prep.bytes.length });
+  const m = addLocal(env, { blob: localBlob, url: URL.createObjectURL(localBlob), prog: 0 });
+  m.upload = async () => {
+    const r = await uploadEncrypted(prep.bytes, (p) => { m.prog = p; if (m.setProg) m.setProg(p); });
+    env.p = r.p; env.k = r.k; m.uploaded = true;
+  };
+  try {
+    await m.upload();
+    if (m.setProg) m.setProg(null);
+    await ingest(await postEnvelope(env));
+    prep.bytes = null;
+  } catch (e) { if (m.setProg) m.setProg(null); markFailed(m, e); }
+}
+async function handleFiles(files) {
+  for (const f of files) {
+    try {
+      const type = f.type || '';
+      if (/^image\//.test(type) || /\.(heic|heif|jpe?g|png|gif|webp)$/i.test(f.name)) { toast('Encrypting photo…', 1500); await sendMedia('image', await prepImage(f)); }
+      else if (/^video\//.test(type) || /\.(mov|mp4|m4v)$/i.test(f.name)) { toast('Encrypting video…', 1500); await sendMedia('video', await prepVideo(f)); }
+      else if (/^audio\//.test(type) || /\.(m4a|mp3|aac|wav)$/i.test(f.name)) {
+        if (f.size > MAX_VIDEO) throw new AppError('Audio files can be up to 45 MB.');
+        const dur = await audioDuration(f);
+        await sendMedia('voice', { bytes: new Uint8Array(await f.arrayBuffer()), mime: safeMime(type || 'audio/mp4'), dur, wave: null });
+      } else toast('That file type isn’t supported.');
+    } catch (e) { toast(friendly(e), 4000); }
+  }
+}
+['fCamera', 'fLibrary', 'fAudio'].forEach((id) => {
+  const inp = document.getElementById(id);
+  inp.addEventListener('change', () => { const files = [...inp.files]; inp.value = ''; if (files.length) handleFiles(files); });
+});
+
+function ringEl() {
+  const r = 19, C = 2 * Math.PI * r;
+  const wrap = h('div', { class: 'ringwrap' });
+  wrap.innerHTML = '<svg class="ring" viewBox="0 0 46 46"><circle class="bg" cx="23" cy="23" r="' + r + '"/><circle class="fg" cx="23" cy="23" r="' + r + '" stroke-dasharray="' + C + '" stroke-dashoffset="' + C + '"/></svg>';
+  const fg = wrap.querySelector('.fg');
+  wrap.set = (p) => { fg.style.strokeDashoffset = String(C * (1 - Math.max(0.03, Math.min(1, p)))); };
+  return wrap;
+}
+const fmtDur = (s) => { s = Math.max(0, Math.round(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
+function mediaBubble(m) {
+  const e = m.env, isVid = e.t === 'video';
+  const ratio = Math.max(0.56, Math.min(1.6, (e.h || 1) / (e.w || 1)));
+  const frame = h('div', { class: 'frame', style: 'padding-top:' + (ratio * 100).toFixed(1) + '%' });
+  const ovl = h('div', { class: 'ovl' });
+  if (e.th && /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(e.th)) frame.append(h('img', { class: 'th', src: e.th, alt: '' }));
+  const showFull = (url) => {
+    if (isVid) return;
+    const img = h('img', { alt: 'Photo', src: url });
+    frame.querySelectorAll('img:not(.th)').forEach((x) => x.remove());
+    frame.insertBefore(img, ovl);
+  };
+  frame.append(ovl);
+  if (isVid) { ovl.append(h('div', { class: 'play' }, icon('play'))); if (e.dur) frame.append(h('span', { class: 'chip tnum', text: fmtDur(e.dur) })); }
+  let ring = null;
+  m.setProg = (p) => {
+    if (p == null) { if (ring) { ring.remove(); ring = null; } if (isVid && !ovl.firstChild) ovl.append(h('div', { class: 'play' }, icon('play'))); return; }
+    if (!ring) { ovl.replaceChildren(); ring = ringEl(); ovl.append(ring); }
+    ring.set(p);
+  };
+  if (m.url && !isVid) showFull(m.url);
+  else if (!isVid && e.p && (e.size || 0) < 12 * 1048576) {
+    // photos auto-download; videos wait for a tap
+    setTimeout(() => fetchMedia(m, m.setProg).then((u) => { m.setProg(null); showFull(u); }).catch(() => m.setProg(null)), 0);
+  }
+  const bub = h('button', { class: 'bub media', 'aria-label': isVid ? 'Play video' : 'Open photo', onclick: async () => {
+    try { const u = await fetchMedia(m, m.setProg); m.setProg(null); if (!isVid) showFull(u); openViewer(m); }
+    catch (err) { m.setProg(null); toast(friendly(err)); }
+  } }, frame);
+  return bub;
+}
+
+let currentAudio = null;
+function voiceBubble(m) {
+  const e = m.env;
+  const n = 34;
+  const levels = Array.isArray(e.wave) && e.wave.length ? resample(e.wave, n) : Array.from({ length: n }, (_, i) => 0.25 + 0.5 * Math.abs(Math.sin(i * 1.7 + (e.n || 'x').charCodeAt(0))));
+  const bars = levels.map((l) => h('i', { style: 'height:' + Math.round(18 + 82 * Math.sqrt(Math.max(0, Math.min(1, l)))) + '%' }));
+  const wave = h('div', { class: 'wave', 'aria-hidden': 'true' }, bars);
+  const dur = h('span', { class: 'vdur tnum', text: fmtDur(e.dur) });
+  const btn = h('button', { class: 'vplay', 'aria-label': 'Play voice note' }, icon('play'));
+  let audio = null, raf = 0;
+  const paint = () => {
+    if (!audio) return;
+    const p = audio.duration ? audio.currentTime / audio.duration : 0;
+    bars.forEach((b, i) => b.classList.toggle('on', i / n < p));
+    dur.textContent = fmtDur(audio.paused && !audio.currentTime ? e.dur : audio.currentTime);
+    if (!audio.paused) raf = requestAnimationFrame(paint);
+  };
+  const setIcon = (playing) => { btn.replaceChildren(icon(playing ? 'pause' : 'play')); btn.setAttribute('aria-label', playing ? 'Pause' : 'Play voice note'); };
+  m.setProg = (p) => { if (p == null) { setIcon(audio && !audio.paused); return; } const r = ringEl(); r.style.cssText = 'width:38px;height:38px;background:none'; r.set(p); btn.replaceChildren(r); };
+  btn.addEventListener('click', async () => {
+    try {
+      if (audio && !audio.paused) { audio.pause(); return; }
+      const url = await fetchMedia(m, m.setProg);
+      if (!audio) {
+        audio = new Audio(url); audio.preload = 'auto';
+        audio.onplay = () => { setIcon(true); paint(); };
+        audio.onpause = () => { setIcon(false); cancelAnimationFrame(raf); paint(); };
+        audio.onended = () => { audio.currentTime = 0; setIcon(false); bars.forEach((b) => b.classList.remove('on')); dur.textContent = fmtDur(e.dur); };
+        m.audio = audio;
+      }
+      if (currentAudio && currentAudio !== audio) currentAudio.pause();
+      currentAudio = audio;
+      await audio.play();
+    } catch (err) { setIcon(false); toast(friendly(err)); }
+  });
+  return h('div', { class: 'bub voice' }, btn, wave, dur);
+}
+function down(arr, n) { // max per bucket
+  const out = [];
+  for (let i = 0; i < n; i++) { const a = Math.floor(i * arr.length / n), b = Math.max(a + 1, Math.floor((i + 1) * arr.length / n)); let mx = 0; for (let j = a; j < b && j < arr.length; j++) mx = Math.max(mx, +arr[j] || 0); out.push(mx); }
+  return out;
+}
+const resample = (arr, n) => down(arr, n).map((v) => v / 31); // stored waveform is 0..31
+
+/* ---------------- viewer + export ---------------- */
+function openViewer(m) {
+  const e = m.env;
+  const media = e.t === 'video'
+    ? h('video', { src: m.url, controls: true, playsinline: true, autoplay: true, 'webkit-playsinline': true })
+    : h('img', { src: m.url, alt: 'Photo' });
+  const close = () => { if (media.pause) media.pause(); v.remove(); };
+  const v = h('div', { class: 'viewer', role: 'dialog', 'aria-label': 'Media viewer' },
+    h('div', { class: 'vbar' },
+      h('button', { class: 'tb', 'aria-label': 'Close', onclick: close }, icon('x')),
+      h('div', { class: 'vt' }, h('b', { text: m.me ? 'You' : partnerName() }), h('span', { class: 'tnum', text: fmtTime(m.created) })),
+      h('button', { class: 'tb', 'aria-label': 'Save or share', onclick: () => exportMedia(m) }, icon('share'))),
+    h('div', { class: 'stage' }, media));
+  document.body.append(v);
+}
+async function exportMedia(m) {
+  const ok = await confirmDialog('Save outside the app?', 'The decrypted file leaves pvtshiiiiii and won’t disappear after 24 hours. Anywhere you save it (Photos, iCloud, AirDrop) keeps a copy.', 'Continue');
+  if (!ok) return;
+  try {
+    toast('Preparing…', 1500);
+    const bytes = new Uint8Array(await m.blob.arrayBuffer());
+    const x = b64u(rnd(9));
+    for (let i = 0; i < bytes.length; i += 510000) OUT.push({ t: 'chunk', x, d: b64(bytes.subarray(i, i + 510000)) });
+    await call('export', { x, mime: safeMime(m.env.mime), name: String(m.created) }, 15 * 60 * 1000);
+  } catch (e) { toast(friendly(e), 4000); }
+}
+
+/* ---------------- composer + voice recording ---------------- */
+function drawComposer() {
+  const c = $('#composer'); if (!c) return;
+  const ta = h('textarea', { id: 'txt', rows: '1', placeholder: 'Message', 'aria-label': 'Message', enterkeyhint: 'send', autocomplete: 'off' });
+  const act = h('button', { class: 'cbtn pri', id: 'act', 'aria-label': 'Record voice note' }, icon('mic'));
+  const sync = () => {
+    ta.style.height = 'auto'; ta.style.height = Math.min(132, ta.scrollHeight) + 'px';
+    const has = ta.value.trim().length > 0;
+    if (act.dataset.mode !== (has ? 's' : 'm')) { act.dataset.mode = has ? 's' : 'm'; act.replaceChildren(icon(has ? 'send' : 'mic')); act.setAttribute('aria-label', has ? 'Send' : 'Record voice note'); }
+  };
+  const send = () => { const v = ta.value.trim(); if (!v) return; if (v.length > 8000) { toast('That message is too long.'); return; } ta.value = ''; sync(); sendText(v); };
+  ta.addEventListener('input', sync);
+  ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } });
+  act.addEventListener('click', () => (ta.value.trim() ? send() : startRecording()));
+  c.replaceChildren(
+    h('button', { class: 'cbtn', 'aria-label': 'Attach', onclick: attachSheet }, icon('plus')),
+    h('div', { class: 'inputwrap' }, ta), act);
+  sync();
+}
+function attachSheet() {
+  const opt = (ic, t, d, fn) => h('button', { class: 'opt', onclick: () => { closeSheet(); fn(); } }, h('span', { class: 'oi' }, icon(ic)), h('span', { class: 'ot' }, t, h('small', { text: d })));
+  sheet('Send', [h('div', { class: 'opts' },
+    opt('camera', 'Camera', 'Take a photo or record a video', () => $('#fCamera').click()),
+    opt('photo', 'Photos & videos', 'Choose from your library or Files', () => $('#fLibrary').click()),
+    opt('mic', 'Voice note', 'Record with the microphone', startRecording),
+    opt('file', 'Audio file', 'Send a recording from Files', () => $('#fAudio').click()))], 'Cancel');
+}
+
+let REC = null;
+async function startRecording() {
+  if (REC) return;
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) {
+    toast('Voice recording isn’t available here. Use + › Audio file instead.', 4500);
+    return;
+  }
+  let stream;
+  try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); }
+  catch (e) { toast(/NotAllowed|denied/i.test(String(e && (e.name || e.message))) ? 'Microphone access is off. Allow it in Settings › Scriptable.' : 'Couldn’t start the microphone.', 4500); return; }
+  const mime = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm'].find((t) => MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t)) || '';
+  let rec;
+  try { rec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 64000 } : undefined); }
+  catch (e) { stream.getTracks().forEach((t) => t.stop()); toast('Couldn’t start recording.'); return; }
+  const chunks = [], levels = [];
+  let ctx = null, analyser = null, buf = null;
+  try {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ctx.createMediaStreamSource(stream);
+    analyser = ctx.createAnalyser(); analyser.fftSize = 512; src.connect(analyser); buf = new Uint8Array(analyser.fftSize);
+  } catch (e) { /* level meter is optional */ }
+  REC = { rec, stream, chunks, levels, ctx, start: Date.now(), cancelled: false };
+  rec.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+  rec.start(250);
+
+  const c = $('#composer');
+  const time = h('span', { class: 'time tnum', text: '0:00' });
+  const live = h('div', { class: 'wave', 'aria-hidden': 'true' });
+  c.replaceChildren(
+    h('button', { class: 'cbtn del', 'aria-label': 'Discard recording', onclick: () => stopRecording(false) }, icon('trash')),
+    h('div', { class: 'rec', role: 'status', 'aria-label': 'Recording' }, h('span', { class: 'dot' }), time, live),
+    h('button', { class: 'cbtn pri', 'aria-label': 'Send voice note', onclick: () => stopRecording(true) }, icon('send')));
+  REC.timer = setInterval(() => {
+    const el = Date.now() - REC.start;
+    time.textContent = fmtDur(el / 1000);
+    let lv = 0.08;
+    if (analyser) { analyser.getByteTimeDomainData(buf); let s = 0; for (let i = 0; i < buf.length; i++) { const d = (buf[i] - 128) / 128; s += d * d; } lv = Math.min(1, Math.sqrt(s / buf.length) * 4.5); }
+    levels.push(lv);
+    live.append(h('i', { style: 'height:' + Math.round(14 + 86 * Math.sqrt(lv)) + '%' }));
+    while (live.children.length > 60) live.firstChild.remove();
+    if (el >= MAX_VOICE_MS) stopRecording(true);
+  }, 100);
+}
+async function stopRecording(send) {
+  const R = REC; if (!R) return; REC = null;
+  clearInterval(R.timer);
+  const dur = (Date.now() - R.start) / 1000;
+  const done = new Promise((res) => { R.rec.onstop = res; });
+  try { R.rec.stop(); } catch (e) { /* already stopped */ }
+  await Promise.race([done, new Promise((r) => setTimeout(r, 1500))]);
+  R.stream.getTracks().forEach((t) => t.stop());
+  if (R.ctx) R.ctx.close().catch(() => {});
+  drawComposer();
+  if (!send) return;
+  if (dur < 0.8) { toast('Hold on a little longer to record.'); return; }
+  const type = (R.rec.mimeType || R.chunks[0] && R.chunks[0].type || 'audio/mp4').split(';')[0];
+  const blob = new Blob(R.chunks, { type });
+  // 0..31 levels, ~60 samples is plenty for the waveform
+  const wave = down(R.levels, Math.min(60, R.levels.length || 1)).map((v) => Math.round(Math.max(0, Math.min(1, v)) * 31));
+  await sendMedia('voice', { bytes: new Uint8Array(await blob.arrayBuffer()), mime: safeMime(type), dur, wave });
+}
+
+/* ---------------- sheets & dialogs ---------------- */
+let sheetEls = null;
+function sheet(title, content, doneLabel) {
+  closeSheet(true);
+  const scrim = h('div', { class: 'scrim', onclick: () => closeSheet() });
+  const s = h('div', { class: 'sheet', role: 'dialog', 'aria-modal': 'true', 'aria-label': title }, h('div', { class: 'grab' }), h('h2', { text: title }), content,
+    h('button', { class: 'btn cancel', onclick: () => closeSheet() }, doneLabel || 'Done'));
+  document.body.append(scrim, s);
+  requestAnimationFrame(() => { scrim.classList.add('show'); s.classList.add('show'); });
+  sheetEls = [scrim, s];
+  return s;
+}
+function closeSheet(now) {
+  if (!sheetEls) return; const [a, b] = sheetEls; sheetEls = null;
+  if (now) { a.remove(); b.remove(); return; }
+  a.classList.remove('show'); b.classList.remove('show'); setTimeout(() => { a.remove(); b.remove(); }, 300);
+}
+function confirmDialog(title, text, okLabel, danger) {
+  return new Promise((res) => {
+    const scrim = h('div', { class: 'scrim top' });
+    const done = (v) => { scrim.classList.remove('show'); d.classList.remove('show'); setTimeout(() => { scrim.remove(); d.remove(); }, 200); res(v); };
+    const d = h('div', { class: 'dialog', role: 'alertdialog', 'aria-modal': 'true' }, h('h3', { text: title }), h('p', { text: text }),
+      h('div', { class: 'actions' }, h('button', { class: 'btn ' + (danger ? 'danger' : 'pri'), onclick: () => done(true) }, okLabel), h('button', { class: 'btn', onclick: () => done(false) }, 'Cancel')));
+    scrim.addEventListener('click', () => done(false));
+    document.body.append(scrim, d);
+    requestAnimationFrame(() => { scrim.classList.add('show'); d.classList.add('show'); });
+  });
+}
+
+async function settingsSheet() {
+  const opt = (ic, t, d, fn, cls) => h('button', { class: 'opt' + (cls ? ' ' + cls : ''), onclick: fn }, h('span', { class: 'oi' }, icon(ic)), h('span', { class: 'ot' }, t, d ? h('small', { text: d }) : null));
+  const nameIn = h('input', { class: 'field', value: V.name || '', placeholder: 'Partner', maxlength: '40', 'aria-label': 'Partner name', autocomplete: 'off' });
+  nameIn.addEventListener('change', async () => { V.name = nameIn.value.trim().slice(0, 40); await sealVault().catch(() => {}); renderChrome(); });
+  const parts = [h('div', { class: 'sect', text: 'Name on this phone' }), nameIn];
+  if (V.peer) {
+    const sn = await safetyNumber(V.pub, V.peer);
+    parts.push(h('div', { class: 'sect', text: 'Safety number' }),
+      h('div', { class: 'card' },
+        h('div', { class: 'safety', translate: 'no', 'aria-label': 'Safety number ' + sn.join(' ') }, sn.map((g) => h('span', { text: g }))),
+        h('p', { class: 'hint', style: 'text-align:center', text: 'Compare these numbers with your partner in person or on a call. If they match, nobody is in the middle.' }),
+        h('div', { style: 'display:flex;justify-content:center;margin-top:10px' }, V.verified
+          ? h('span', { class: 'pill ok' }, icon('check'), 'Verified')
+          : h('button', { class: 'btn pri', style: 'height:44px;width:auto;padding:0 18px', onclick: async () => {
+            if (await confirmDialog('Numbers match?', 'Only mark as verified after comparing all 30 digits with your partner.', 'They match')) { V.verified = true; await sealVault(); renderChrome(); closeSheet(); toast('Marked as verified'); }
+          } }, 'Mark as verified'))));
+  }
+  const items = [];
+  if (V.role === 'c' && partnerCount < 2 && !MK) items.push(opt('share', 'Invite partner', 'Create a new one-time invite', async () => { try { const c = await rpc('new_invite', { p_space: V.space }); closeSheet(true); inviteSheet(await addInviteSecret(c)); } catch (e) { toast(friendly(e)); } }));
+  items.push(opt('lock', 'Lock now', 'Auto-locks a minute after you leave', () => { closeSheet(true); lockNow(); }));
+  items.push(opt('trash', 'Reset this phone', 'Delete keys and pairing from this phone', resetPhone, 'danger'));
+  parts.push(h('div', { class: 'sect', text: 'Security' }), h('div', { class: 'opts' }, items),
+    h('p', { class: 'hint', style: 'text-align:center;margin-top:16px', text: 'pvtshiiiiii ' + VERSION + ' · messages expire after 24 hours' }));
+  sheet('Settings', parts);
+}
+
+/* ---------------- lock / lifecycle ---------------- */
+function lockNow(silent) {
+  stopPolling();
+  if (REC) stopRecording(false);
+  if (currentAudio) currentAudio.pause();
+  for (const m of LIST) { if (m.url) URL.revokeObjectURL(m.url); m.url = null; m.blob = null; }
+  LIST = []; BYID = new Map(); BYNONCE = new Map();
+  MK = null; V = null; WRAP = null;
+  document.querySelectorAll('.viewer,.sheet,.scrim,.dialog').forEach((n) => n.remove()); sheetEls = null;
+  if (!silent && ST.vault) lockScreen();
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { hiddenAt = Date.now(); return; }
+  if (V && hiddenAt && Date.now() - hiddenAt > AUTOLOCK_MS) lockNow();
+  else if (V) poll();
+  hiddenAt = 0;
+});
+
+/* ---------------- keyboard: keep composer above the iOS keyboard ---------------- */
+if (window.visualViewport) {
+  const vv = window.visualViewport;
+  const fit = () => {
+    const r = $('#root'); if (!r) return;
+    r.style.height = vv.height + 'px';
+    window.scrollTo(0, 0);
+    const L = $('#list'), a = document.activeElement;
+    if (L && a && a.id === 'txt') L.scrollTop = L.scrollHeight;
+  };
+  vv.addEventListener('resize', fit);
+  vv.addEventListener('scroll', () => window.scrollTo(0, 0));
+}
+
+/* ---------------- boot ---------------- */
+async function boot() {
+  if (!subtle) return fatal('Encryption unavailable', 'This view has no Web Crypto, so nothing was sent or stored.');
+  if (!CFG.url || !CFG.key || CFG.key.indexOf('PASTE') === 0) return fatal('Not configured', 'Add your Supabase URL and publishable key at the top of the script, then run it again.');
+  if (ST.legacy) return upgradeScreen();
+  if (ST.vault && ST.vault.c) return lockScreen();
+  welcome();
+}
+boot();
+</script>
+</body>
+</html>
