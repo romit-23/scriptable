@@ -14,7 +14,7 @@
 const UPDATE_CONFIG = {
   // Set to the raw URL of the folder that holds pvtshiiiiii.js and pvtshiiiiii.js.sig on the new account.
   // Example: "https://raw.githubusercontent.com/<owner>/<repo>/main/"
-  baseUrl: "https://raw.githubusercontent.com/OWNER/REPO/main/",
+  baseUrl: "https://raw.githubusercontent.com/romit-23/scriptable/main/",
   appFile: "pvtshiiiiii.js",
   sigFile: "pvtshiiiiii.js.sig",
   cacheApp: "pvtshiiiiii-app-cache.js",
