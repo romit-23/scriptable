@@ -82,16 +82,24 @@ const PVT_VERIFY = (() => {
 
   const B64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
   function fromBase64(str) {
-    const s = String(str).replace(/[\s=]/g, "");
-    if (/[^A-Za-z0-9+/]/.test(s) || s.length % 4 === 1) throw new Error("bad base64");
-    const out = new Uint8Array(Math.floor((s.length * 3) / 4));
-    let buf = 0, bitsN = 0, j = 0;
-    for (let i = 0; i < s.length; i++) {
-      buf = (buf << 6) | B64.indexOf(s[i]);
-      bitsN += 6;
-      if (bitsN >= 8) { bitsN -= 8; out[j++] = (buf >> bitsN) & 0xff; }
+    const s = String(str).replace(/\s/g, "");
+    if (!/^[A-Za-z0-9+/]*={0,2}$/.test(s) || s.length % 4 === 1) throw new Error("bad base64");
+    const pad = (s.match(/=*$/) || [""])[0].length;
+    const clean = s.replace(/=+$/, "");
+    const padded = clean + "=".repeat((4 - (clean.length % 4)) % 4);
+    const out = new Uint8Array((padded.length / 4) * 3 - pad);
+    let j = 0;
+    for (let i = 0; i < padded.length; i += 4) {
+      const a = B64.indexOf(padded[i]);
+      const b = B64.indexOf(padded[i + 1]);
+      const c = padded[i + 2] === "=" ? 0 : B64.indexOf(padded[i + 2]);
+      const d = padded[i + 3] === "=" ? 0 : B64.indexOf(padded[i + 3]);
+      const n = (a << 18) | (b << 12) | (c << 6) | d;
+      if (j < out.length) out[j++] = (n >>> 16) & 0xff;
+      if (j < out.length) out[j++] = (n >>> 8) & 0xff;
+      if (j < out.length) out[j++] = n & 0xff;
     }
-    return out.subarray(0, j);
+    return out;
   }
 
   const toBig = (bytes) => {
