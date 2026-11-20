@@ -342,7 +342,7 @@ let MK = null;     // message key (memory only while unlocked)
 let LIST = [], BYID = new Map(), BYNONCE = new Map();
 let replyTarget = null;
 let partnerLastSeen = 0, partnerTypingUntil = 0, lastTypingReported = 0, partnerReadTimestamp = 0;
-let lastHeartbeat = 0;
+let lastHeartbeat = 0, lastActiveBeat = 0;
 let cursor = null, polling = false, pollTimer = null, partnerCount = 0, tick = 0, hiddenAt = 0, cleaned = false;
 
 class AppError extends Error {}
@@ -954,6 +954,14 @@ function renderChrome() {
 }
 
 /* ---------------- polling ---------------- */
+// Tell the widget this chat is on screen, so it only alerts when you are away.
+function reportActive() {
+  if (document.hidden) return;
+  const now = Date.now();
+  if (now - lastActiveBeat < 15000) return;
+  lastActiveBeat = now;
+  save('active', now).catch(() => {});
+}
 function startPolling() { stopPolling(); poll(); pollTimer = setInterval(poll, 3000); }
 function stopPolling() { if (pollTimer) clearInterval(pollTimer); pollTimer = null; }
 async function poll() {
@@ -985,6 +993,7 @@ async function poll() {
       const m = await api('/rest/v1/members?select=user_id&space_id=eq.' + V.space);
       partnerCount = (m || []).length;
     }
+    reportActive();
     // Presence heartbeat every 20s
     if (Date.now() - lastHeartbeat > 20000) {
       lastHeartbeat = Date.now();
@@ -1099,10 +1108,7 @@ async function ingest(rows) {
     const m = { id: r.id, me: !isThem, created, expires, env, status: 'sent' };
     BYID.set(r.id, m); if (env) BYNONCE.set(env.n, m);
     LIST.push(m); changed = true;
-    if (isThem && cursor) {
-      // Message arrived live while in chat: play notification chime!
-      playNotificationSound();
-    }
+    // No chime here: the home screen widget alerts you only when this page is off screen.
   }
   if (changed) { LIST.sort((a, b) => a.created - b.created); renderList(true); }
   if (newest) save('seen', new Date(newest + 1).toISOString()).catch(() => {});
@@ -1765,7 +1771,14 @@ function lockNow(silent) {
   if (!silent && ST.vault) lockScreen();
 }
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { hiddenAt = Date.now(); return; }
+  if (document.hidden) {
+    // Off screen: let the widget alert for new partner messages.
+    lastActiveBeat = 0;
+    save('active', null).catch(() => {});
+    hiddenAt = Date.now();
+    return;
+  }
+  lastActiveBeat = 0; reportActive();
   if (V && hiddenAt && Date.now() - hiddenAt > AUTOLOCK_MS) lockNow();
   else if (V) poll();
   hiddenAt = 0;
