@@ -12,7 +12,7 @@
 :root{
   --bg:#0A0A0D;--elev:#121218;--surface:#17171E;--surface-2:#202029;--surface-3:#2A2A35;
   --line:rgba(255,255,255,.07);--line-2:rgba(255,255,255,.12);
-  --text:#F4F4F6;--text-2:#A3A3AE;--text-3:#70707C;
+  --text:#F4F4F6;--text-2:#A3A3AE;--text-3:#8A8A96;
   --accent:#7D82FF;--accent-strong:#5A5EEA;--accent-soft:rgba(125,130,255,.14);--on-accent:#FFFFFF;
   --me-1:#5A5EEA;--me-2:#7547DB;--them:#1C1C24;
   --danger:#FF6B6B;--danger-soft:rgba(255,107,107,.12);--ok:#3DDC97;--ok-soft:rgba(61,220,151,.12);--warn:#FFB547;--warn-soft:rgba(255,181,71,.12);
@@ -27,7 +27,7 @@
   :root{
     --bg:#F4F4F7;--elev:#FFFFFF;--surface:#FFFFFF;--surface-2:#EDEDF2;--surface-3:#E2E2E9;
     --line:rgba(10,10,20,.07);--line-2:rgba(10,10,20,.12);
-    --text:#111116;--text-2:#5C5C69;--text-3:#8B8B97;
+    --text:#111116;--text-2:#5C5C69;--text-3:#65656F;
     --accent:#4F53E0;--accent-strong:#4F53E0;--accent-soft:rgba(79,83,224,.10);
     --them:#FFFFFF;--danger:#D93C3C;--danger-soft:rgba(217,60,60,.10);--ok:#18A06A;--ok-soft:rgba(24,160,106,.10);--warn:#B86E00;--warn-soft:rgba(184,110,0,.10);
     --scrim:rgba(10,10,20,.35);--shadow:0 18px 50px rgba(10,10,30,.18);
@@ -117,7 +117,7 @@ textarea.field{min-height:120px;font-family:var(--mono);font-size:1rem;line-heig
 .who .st{display:flex;align-items:center;gap:5px;font-size:var(--fs-micro);color:var(--text-2);line-height:1.3;margin-top:1px;white-space:nowrap}
 .who .st .ico{width:.8rem;height:.8rem;color:var(--ok)}
 .who .st.unv .ico{color:var(--warn)}
-.tb{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--text-2)}
+.tb{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--text-2)}
 .tb:active{background:var(--surface-2)}
 .banner{flex:none;margin:10px 12px 0;padding:12px 14px;border-radius:var(--r-md);font-size:var(--fs-caption);line-height:1.4;display:flex;gap:10px;align-items:flex-start}
 .banner .ico{width:1.1rem;height:1.1rem;margin-top:1px}
@@ -134,7 +134,7 @@ textarea.field{min-height:120px;font-family:var(--mono);font-size:1rem;line-heig
 .msg.gs{margin-top:12px}
 .msg.me{align-items:flex-end}
 .daysep{align-self:center;margin:14px 0 6px;font-size:var(--fs-micro);font-weight:600;color:var(--text-3);letter-spacing:.05em;text-transform:uppercase}
-.bub{max-width:min(78%,320px);padding:9px 14px;border-radius:20px;background:var(--them);border:1px solid var(--line);font-size:var(--fs-body);line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere;position:relative}
+.bub{max-width:min(78vw,320px);padding:9px 14px;border-radius:20px;background:var(--them);border:1px solid var(--line);font-size:var(--fs-body);line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere;position:relative}
 .me .bub{background:linear-gradient(135deg,var(--me-1),var(--me-2));border-color:transparent;color:var(--on-accent)}
 .msg:not(.ge) .bub{border-bottom-left-radius:8px}
 .msg.me:not(.ge) .bub{border-bottom-left-radius:20px;border-bottom-right-radius:8px}
@@ -183,7 +183,7 @@ textarea.field{min-height:120px;font-family:var(--mono);font-size:1rem;line-heig
 @keyframes td { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
 
 /* Reply Dock preview above composer */
-.reply-bar { display: none; align-items: center; justify-content: space-between; padding: 8px 14px; background: var(--surface-2); border-left: 3px solid var(--accent); border-radius: 12px; margin-bottom: 6px; width: 100%; box-sizing: border-box; }
+.reply-bar { display: none; align-items: center; justify-content: space-between; padding: 8px 14px; background: var(--surface-2); border: 1px solid var(--line-2); border-radius: 12px; margin-bottom: 6px; width: 100%; box-sizing: border-box; }
 .reply-bar.show { display: flex; }
 .reply-bar .rb-info { flex: 1; min-width: 0; }
 .reply-bar .rb-who { font-size: 0.75rem; font-weight: 600; color: var(--accent); }
@@ -191,7 +191,7 @@ textarea.field{min-height:120px;font-family:var(--mono);font-size:1rem;line-heig
 .reply-bar .rb-close { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: var(--text-3); cursor: pointer; }
 
 /* Quoted reply card inside bubble */
-.quote-card { background: rgba(0,0,0,0.22); border-left: 3px solid rgba(255,255,255,0.7); border-radius: 8px; padding: 5px 8px; margin-bottom: 6px; font-size: 0.8125rem; }
+.quote-card { background: color-mix(in srgb, currentColor 9%, transparent); border: 1px solid color-mix(in srgb, currentColor 26%, transparent); border-radius: 8px; padding: 5px 8px; margin-bottom: 6px; font-size: 0.8125rem; }
 .quote-card .q-who { font-weight: 600; font-size: 0.72rem; opacity: 0.9; margin-bottom: 2px; }
 .quote-card .q-txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0.85; }
 
@@ -209,7 +209,7 @@ textarea.field{min-height:120px;font-family:var(--mono);font-size:1rem;line-heig
 
 /* Read receipts / double check */
 .receipt { display: inline-flex; align-items: center; gap: 3px; font-size: 0.7rem; color: var(--text-3); margin-left: 4px; }
-.receipt.seen { color: #58A6FF; font-weight: 500; }
+.receipt.seen { color: var(--accent); font-weight: 500; }
 .receipt svg { width: 13px; height: 13px; }
 
 /* Typing chat bubble */
@@ -223,39 +223,39 @@ textarea.field{min-height:120px;font-family:var(--mono);font-size:1rem;line-heig
 
 /* Composer layout Instagram style */
 .composer-box { display: flex; flex-direction: column; width: 100%; }
-.composer-row { display: flex; align-items: center; gap: 6px; width: 100%; }
-.cam-btn { width: 38px; height: 38px; border-radius: 50%; background: #E1306C; color: #fff; display: grid; place-items: center; flex: none; cursor: pointer; transition: transform 0.12s; }
+.composer-row { display: flex; align-items: center; gap: 4px; width: 100%; }
+.cam-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--surface-2); color: var(--text-2); display: grid; place-items: center; flex: none; cursor: pointer; transition: transform 0.12s, background 0.12s; }
 .cam-btn:active { transform: scale(0.92); }
-.action-ico-btn { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: var(--text-2); flex: none; cursor: pointer; }
+.action-ico-btn { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: var(--text-2); flex: none; cursor: pointer; }
 .action-ico-btn:active { background: var(--surface-2); }
 
 
-::selection { background: rgba(112, 71, 235, 0.35); color: inherit; }
+::selection { background: color-mix(in srgb, var(--accent) 32%, transparent); color: inherit; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.28); }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--text) 18%, transparent); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--text) 30%, transparent); }
 
 /* Polish bubbles */
-.bub { border-radius: 18px; box-shadow: 0 1px 2px rgba(0,0,0,0.12); }
+.bub { border-radius: 18px; }
 .me .bub { background: linear-gradient(135deg, #7047EB 0%, #903BEB 100%); }
 .bub.media { border-radius: 16px; overflow: hidden; }
 
 /* Refined topbar elevation */
-.topbar { border-bottom: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 18px rgba(0,0,0,0.18); }
+.topbar { border-bottom: 1px solid var(--line); }
 
 /* Polished composer pill */
-.inputwrap { border: 1px solid rgba(255,255,255,0.12); box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); }
-.inputwrap:focus-within { border-color: rgba(125, 130, 255, 0.45); }
+.inputwrap { border: 1px solid var(--line-2); }
+.inputwrap:focus-within { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
 
 /* composer */
 .composer{flex:none;display:flex;align-items:flex-end;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
-.cbtn{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;color:var(--text-2);background:var(--surface-2);transition:transform .12s,background .12s}
+.cbtn{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;color:var(--text-2);background:var(--surface-2);transition:transform .12s,background .12s}
 .cbtn:active{transform:scale(.92)}
 .cbtn.pri{background:var(--accent-strong);color:var(--on-accent)}
 .cbtn .ico{width:1.3rem;height:1.3rem}
 .inputwrap{flex:1;min-width:0;background:var(--surface);border:1px solid var(--line-2);border-radius:21px;display:flex}
-#txt{flex:1;min-width:0;border:0;background:transparent;color:var(--text);font:inherit;font-size:1rem;line-height:1.35;padding:10px 16px;max-height:132px;resize:none;outline:0;display:block}
+#txt{flex:1;min-width:0;border:0;background:transparent;color:var(--text);caret-color:var(--accent);font:inherit;font-size:1rem;line-height:1.35;padding:10px 16px;max-height:132px;resize:none;outline:0;display:block}
 #txt::placeholder{color:var(--text-3)}
 .rec{flex:1;display:flex;align-items:center;gap:10px;height:42px;padding:0 14px;border-radius:21px;background:var(--danger-soft);color:var(--danger);min-width:0}
 .rec .dot{width:9px;height:9px;border-radius:50%;background:var(--danger);animation:pulse 1.2s ease-in-out infinite;flex:none}
@@ -1598,9 +1598,20 @@ function drawComposer() {
     }
   };
 
-  const send = () => { const v = ta.value.trim(); if (!v) return; if (v.length > 8000) { toast('That message is too long.'); return; } ta.value = ''; sync(); sendText(v); };
+  // Sending must not drop the keyboard: the field keeps focus, and the send control never
+  // takes focus away from it, so the keyboard stays up like it does in Messages or Instagram.
+  const keepFocus = () => { try { ta.focus({ preventScroll: true }); } catch (e) { try { ta.focus(); } catch (e2) {} } };
+  const send = () => {
+    const v = ta.value.trim();
+    if (!v) return;
+    if (v.length > 8000) { toast('That message is too long.'); return; }
+    ta.value = ''; sync(); sendText(v);
+    keepFocus();
+    requestAnimationFrame(keepFocus);
+  };
   ta.addEventListener('input', sync);
   ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } });
+  act.addEventListener('mousedown', (e) => e.preventDefault());
   act.addEventListener('click', () => (ta.value.trim() ? send() : startRecording()));
 
   // Keyboard sticker & image paste listener
