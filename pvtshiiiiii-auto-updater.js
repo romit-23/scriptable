@@ -24,7 +24,7 @@ const UPDATE_CONFIG = {
 };
 
 // Raw uncompressed P-256 public key (65 bytes, base64). Written by `node tools/sign.mjs keygen`.
-const RELEASE_PUBLIC_KEY = "BMTQ8UNWjjrt+6kjDi9gJusysnVhaUuQvD7RzAj93TAnWC8LEIvXAkCxnWBgz76YrO9HjSd7PJMT+kbkx2/kFj4=";
+const RELEASE_PUBLIC_KEY = "BDbzjmlDVlE5RN80/7+/i0mGrvJI990o9MYYC6HyE1p+YTnzHa0w0oNNoSK1HQgOQzSl7XTV+zUIXqtgUnJ57Zc=";
 
 // ---- BEGIN VERIFIER ----
 // Pure-JS SHA-256 + ECDSA P-256 (IEEE P1363 r||s) verification. Scriptable's JSContext has no
