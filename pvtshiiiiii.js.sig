@@ -1,6 +1,6 @@
 {
   "alg": "ES256",
-  "version": "2.1.0",
-  "sha256": "654490908f9cef69b9aa63d3c28f4c1ea3ecb5fc8650ba31fd4713618b691c2a",
-  "sig": "8a1wXe1o8+V7wr750Vhe7pqNyXZWpjazvtru/NM6dHc9qqa11+nZRGi8TbAXxANO6AhKJq048D6XrKyyCfORmg=="
+  "version": "2.2.0",
+  "sha256": "7997a2ee0b0759809fece16e2c2a63ad13593004b8741d792e751d5613b3846b",
+  "sig": "qOU9Ifb5mzapjGyIF45Bn8m24wSwstv8Xc/ii/QiA+pGz1i4UtPXkqDueDQ1Doid9MnqeHCMeWUcGquT8B/49A=="
 }
